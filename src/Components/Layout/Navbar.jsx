@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 function Navbar() {
   return (
     <div>
-      <div className="flex justify-between px-6 py-3 bg-blue-200 ">
+      <div className="flex justify-between px-6 py-3 bg-amber-300 ">
         <div>
           <h1 className="flex ">
             <IconChefHat size={60} stroke={2} color="blue" />
@@ -25,7 +25,7 @@ function Navbar() {
           </h1>
         </div>
 
-        <div className="text-xl font-semibold   flex items-center justify-center gap-5">
+        <div className="text-xl font-semibold   flex items-center justify-center gap-5 ">
           <Link
             to="/"
             className="hover:text-indigo-600 transition flex gap-0.5 "
