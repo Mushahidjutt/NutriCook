@@ -52,7 +52,7 @@ function Signup() {
                 ) : null}
               </div>
 
-              <div className="mb-5 flex flex-col gap-2">
+              <div className="mb-5 flex flex-col gap-3">
                 <label className="text-gray-700">Email</label>
                 <input
                   type="email"
