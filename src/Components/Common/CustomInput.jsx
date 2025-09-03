@@ -5,6 +5,7 @@ const CustomInput = ({
   onChange,
   placeholder,
   label,
+  onBlur,
   type = "text",
   variant = "default",
 }) => {
@@ -30,6 +31,7 @@ const CustomInput = ({
       <input
         type={type}
         value={value}
+        onBlur={onBlur}
         onChange={onChange}
         placeholder={placeholder}
         variant="default"

@@ -6,6 +6,8 @@ import Logout from "../Pages/Logout";
 import Nutrients from "../Pages/Nutrients";
 import Recipe from "../Pages/Recipe";
 import Profile from "../Pages/Profile";
+import Signup from "../Components/Authentication/Signup";
+import Login from "../Components/Authentication/Login";
 
 export const routes = createBrowserRouter([
   {
@@ -35,6 +37,15 @@ export const routes = createBrowserRouter([
   {
     path: "/recipe",
     element: <Recipe />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+  },
+
+  {
+    path: "/login",
+    element: <Login />,
   },
   {
     path: "*",

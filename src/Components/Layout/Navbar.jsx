@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   IconChefHat,
   IconHome,
@@ -9,12 +10,18 @@ import {
   IconUserCircle,
   IconLogout,
 } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
   return (
     <div>
-      <div className="flex justify-between px-6 py-3 bg-amber-300 ">
+      <div className="flex justify-between px-6 py- bg-[#E2E8F0] ">
         <div>
           <h1 className="flex ">
             <IconChefHat size={60} stroke={2} color="blue" />
@@ -74,13 +81,13 @@ function Navbar() {
             Profile
           </Link>
 
-          <Link
-            to="/logout"
-            className="hover:text-indigo-600 transition flex gap-0.5"
+          <button
+            className="hover:text-indigo-600 transition flex gap-0.5 cursor-pointer"
+            onClick={handleLogout}
           >
-            <IconLogout className="mt-1" size={22} stroke={2} />
             Logout
-          </Link>
+            <IconLogout className="mt-1" size={22} stroke={2} />
+          </button>
         </div>
       </div>
     </div>
