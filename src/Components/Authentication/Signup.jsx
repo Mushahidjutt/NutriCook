@@ -3,27 +3,43 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import CustomButton from "../Common/Button/CustomButton";
 import CustomInput from "../Common/CustomInput";
+import { signupApi } from "../../app/feautures/Authentication/authApi";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object({
-  fullname: Yup.string()
+  name: Yup.string()
     .required(" Full Name is required")
     .min(3, " Full Name must be at least 3 characters"),
   email: Yup.string().required("Address is required"),
   password: Yup.string().required("password is required"),
-  confirmPassword: Yup.string().required("Confirm Password is required"),
+  passwordConfirm: Yup.string().required("Confirm Password is required"),
 });
 
 function Signup() {
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
-      fullname: "",
+      name: "",
       email: "",
       password: "",
-      confirmPassword: "",
+      passwordConfirm: "",
     },
     validationSchema,
-    onSubmit:async (values) => {},
+    onSubmit: async (values) => {
+      try {
+        const res = await signupApi(values);
+        console.log("SignUp  success:", res);
+        navigate("/login");
+      } catch (error) {
+        console.error("Signup Failed : ", error);
+      }
+    },
   });
+
+  const handleNavigateLogin = () => {
+    navigate("/login");
+  };
   return (
     <div>
       <main>
@@ -39,15 +55,15 @@ function Signup() {
                 <label className="text-gray-700">Full Name</label>
                 <input
                   type="text"
-                  name="fullname"
+                  name="name"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.fullname}
+                  value={formik.values.name}
                   className="input grow border border-gray-300 rounded-2xl bg-white px-4 py-2 text-gray-700 focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400 shadow-sm"
                 />
-                {formik.errors.fullname && formik.touched.fullname ? (
+                {formik.errors.name && formik.touched.name ? (
                   <div style={{ color: "red" }} className="text-sm">
-                    {formik.errors.fullname}
+                    {formik.errors.name}
                   </div>
                 ) : null}
               </div>
@@ -90,24 +106,28 @@ function Signup() {
                 <label className="text-gray-700">Confirm Password</label>
                 <input
                   type="password"
-                  name="confirmPassword"
+                  name="passwordConfirm"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.confirmPassword}
+                  value={formik.values.passwordConfirm}
                   className="input grow border border-gray-300 rounded-2xl bg-white px-4 py-2 text-gray-700 focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400 shadow-sm"
                 />
-                {formik.errors.confirmPassword &&
-                formik.touched.confirmPassword ? (
+                {formik.errors.passwordConfirm &&
+                formik.touched.passwordConfirm ? (
                   <div style={{ color: "red" }} className="text-sm">
-                    {formik.errors.confirmPassword}
+                    {formik.errors.passwordConfirm}
                   </div>
                 ) : null}
               </div>
 
               <div className="text-center">
-                <CustomButton type="submit" value="Submit"></CustomButton>
+                <CustomButton type="submit" value="Sign Up"></CustomButton>
               </div>
             </form>
+            <h1 className=" font-semibold text-center my-4">Alreay a user?</h1>
+            <div className="text-center">
+              <CustomButton value="Login"  onClick={handleNavigateLogin} />
+            </div>
           </div>
         </div>
       </main>

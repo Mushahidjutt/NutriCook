@@ -8,6 +8,7 @@ const CustomInput = ({
   onBlur,
   type = "text",
   variant = "default",
+  className,
 }) => {
   let baseClass =
     " my-6 w-full rounded-xl border border-gray-300 bg-white px-4 py-3  text-gray-700 placeholder-gray-400 shadow-sm focus:border-amber-400 focus:ring-2 focus:ring-amber-300 focus:outline-none transition duration-200";
@@ -20,14 +21,14 @@ const CustomInput = ({
           type={type}
           placeholder={placeholder}
           rows={4}
-          className={baseClass}
+          className={`${baseClass} ${className}`}
         />
       </>
     );
   }
   return (
     <>
-       {label && <label className="block mb-1 ml-2">{label}</label>}{" "}
+      {label && <label className="block mb-1 ml-2">{label}</label>}{" "}
       <input
         type={type}
         value={value}

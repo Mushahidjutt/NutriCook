@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import CustomButton from "../Common/Button/CustomButton";
 import { useNavigate } from "react-router-dom";
-import { makeApiCall } from "../../app/api";
+import { loginApi } from "../../app/feautures/Authentication/authApi";
 
 const validationSchema = Yup.object({
   email: Yup.string().required("Email is required"),
@@ -21,32 +21,23 @@ export default function Login() {
     validationSchema,
     onSubmit: async (values) => {
       try {
-        const res = await makeApiCall({
-          url: "v1/users/login", // tumhari API ka endpoint
-          method: "POST",
-          data: {
-            email: values.email,
-            password: values.password,
-          },
-          noAuth: true, // login ke liye token nahi chahiye
-        });
+        const res = await loginApi(values);
 
-        console.log("Login success:", res);
-
-        // agar token response me aata hai to save karo
-        if (res?.token) {
-          localStorage.setItem("token", res.token);
+        if (res?.data?.token) {
+          localStorage.setItem("token", res.data.token);
+        }
+        if (res?.data?.role) {
+          localStorage.setItem("role", res.data.role);
         }
 
-        // navigate after login
-        navigate("/");
+        navigate("/", { replace: true });
       } catch (error) {
         console.error("Login failed Put Correct email/Password:", error);
       }
     },
   });
 
-  const handleNavigate = () => {
+  const handleNavigateSignup = () => {
     navigate("/signup");
   };
 
@@ -56,12 +47,11 @@ export default function Login() {
         <h1 className="text-3xl font-bold text-center my-6">Login</h1>
         <div className="flex justify-center">
           <div className="w-full max-w-3xl p-8 rounded-3xl shadow-2xl mb-8 bg-gradient-to-br from-indigo-200 via-purple-200 to-blue-200">
-            <h1 className="font-semibold text-center">
+            <h1 className="font-semibold text-center mb-6">
               Please Login to your account
             </h1>
 
             <form onSubmit={formik.handleSubmit}>
-              {/* Email */}
               <div className="mb-5 flex flex-col gap-2">
                 <label className="text-gray-700">Email</label>
                 <input
@@ -79,7 +69,6 @@ export default function Login() {
                 )}
               </div>
 
-              {/* Password */}
               <div className="mb-5 flex flex-col gap-2">
                 <label className="text-gray-700">Password</label>
                 <input
@@ -97,16 +86,21 @@ export default function Login() {
                 )}
               </div>
 
-              {/* Login button */}
               <div className="text-center">
                 <CustomButton type="submit" value="Login" />
               </div>
             </form>
 
-            <h1 className="font-bold my-4 text-center">Register?</h1>
+            <h1 className="font-bold my-4 text-center">
+              Don't have an account?
+            </h1>
 
             <div className="text-center">
-              <CustomButton value="Signup" onClick={handleNavigate} />
+              <CustomButton
+                value="Signup"
+                className="bg-green-500 hover:bg-green-600 text-white"
+                onClick={handleNavigateSignup}
+              />
             </div>
           </div>
         </div>

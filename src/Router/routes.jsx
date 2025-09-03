@@ -8,47 +8,66 @@ import Recipe from "../Pages/Recipe";
 import Profile from "../Pages/Profile";
 import Signup from "../Components/Authentication/Signup";
 import Login from "../Components/Authentication/Login";
+import ProtectedRoutes from "../Components/Common/ProtectedRoutes";
 
 export const routes = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <ProtectedRoutes>
+        <Home />
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/recipes",
-    element: <Recipes />,
+    element: (
+      <ProtectedRoutes>
+        <Recipes />
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/profile",
-    element: <Profile />,
+    element: (
+      <ProtectedRoutes>
+        <Profile />
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/liked",
-    element: <Liked />,
+    element: (
+      <ProtectedRoutes>
+        <Liked />
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/logout",
-    element: <Logout />,
+    element: (
+      <ProtectedRoutes>
+        <Logout />
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/nutrients",
-    element: <Nutrients />,
+    element: (
+      <ProtectedRoutes>
+        <Nutrients />
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/recipe",
-    element: <Recipe />,
+    element: (
+      <ProtectedRoutes>
+        <Recipe />
+      </ProtectedRoutes>
+    ),
   },
-  {
-    path: "/signup",
-    element: <Signup />,
-  },
-
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "*",
-    element: <div>Page not found</div>,
-  },
+  { path: "/signup", element: <Signup /> },
+  { path: "/login", element: <Login /> },
+  { path: "*", element: <div>Page not found</div> },
 ]);
