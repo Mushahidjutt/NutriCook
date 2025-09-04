@@ -23,14 +23,14 @@ export default function Login() {
       try {
         const res = await loginApi(values);
 
-        if (res?.data?.token) {
-          localStorage.setItem("token", res.data.token);
+        if (res?.token) {
+          localStorage.setItem("token", res.token);
         }
-        if (res?.data?.role) {
-          localStorage.setItem("role", res.data.role);
+        if (res?.data?.user?.role) {
+          localStorage.setItem("role", res.data.user.role);
         }
 
-        navigate("/", { replace: true });
+        navigate("/");
       } catch (error) {
         console.error("Login failed Put Correct email/Password:", error);
       }
@@ -87,7 +87,11 @@ export default function Login() {
               </div>
 
               <div className="text-center">
-                <CustomButton type="submit" value="Login" />
+                <CustomButton
+                  type="button"
+                  value="Login"
+                  onClick={formik.handleSubmit}
+                />
               </div>
             </form>
 
@@ -96,11 +100,7 @@ export default function Login() {
             </h1>
 
             <div className="text-center">
-              <CustomButton
-                value="Signup"
-                className="bg-green-500 hover:bg-green-600 text-white"
-                onClick={handleNavigateSignup}
-              />
+              <CustomButton value="Signup" onClick={handleNavigateSignup} />
             </div>
           </div>
         </div>

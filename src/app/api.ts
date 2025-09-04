@@ -29,7 +29,7 @@ async function makeApiCall({
         const response = await axios({
             method,
             data,
-            url: `${baseURL}/${url}`, // sirf ek env use karo
+            url: `${baseURL}/${url}`,
             headers,
             ...config,
         });

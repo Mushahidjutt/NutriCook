@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../Components/Layout/Navbar";
 import CustomInput from "../Components/Common/CustomInput";
-import { makeApiCall } from "../app/api";
+import { getNutrientsApi } from "../app/feautures/Recipes/recipesApi";
 
 function Nutrients() {
   const [nutrients, setNutrients] = useState({});
@@ -10,16 +10,11 @@ function Nutrients() {
 
   const handleGetNutrients = async () => {
     try {
-      const response = await makeApiCall({
-        url: "v1/recipes/nutrients",
-        method: "POST",
-        data: {
-          ingredients: [{ ingName: query }],
-        },
+      const response = await getNutrientsApi({
+        ingredients: [{ ingName: query }],
       });
 
       setNutrients(response);
-
       setOnClick(true);
     } catch (error) {
       console.error("Error fetching nutrients:", error);
@@ -68,7 +63,6 @@ function Nutrients() {
                   <p>Fat: {item.nutrients.fat}</p>
                   <p>Carbs: {item.nutrients.carbohydrates}</p>
 
-                  {/* <h3 className="font-semibold mt-2">Vitamins:</h3> */}
                   <p>Sodium: {item.nutrients.vitamins.sodium}</p>
                   <p>Potassium: {item.nutrients.vitamins.potassium}</p>
                   <p>Cholesterol: {item.nutrients.vitamins.cholesterol}</p>

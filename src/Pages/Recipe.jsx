@@ -3,6 +3,8 @@ import Navbar from "../Components/Layout/Navbar";
 import CustomInput from "../Components/Common/CustomInput";
 import CustomButton from "../Components/Common/Button/CustomButton";
 import { useState } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 function Recipe() {
   // const [ingredients, setIngredients] = useState("");
@@ -16,8 +18,7 @@ function Recipe() {
 
   const AddIngredients = () => {
     // if (ingredientsList.trim() !== "") {
-      setIngredientsList([...ingredientsList, ""]);
-    
+    setIngredientsList([...ingredientsList, ""]);
   };
   const RemoveInput = (index) => {
     const updateList = ingredientsList.filter((_, i) => i !== index);
