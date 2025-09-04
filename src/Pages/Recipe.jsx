@@ -2,28 +2,62 @@ import React from "react";
 import Navbar from "../Components/Layout/Navbar";
 import CustomInput from "../Components/Common/CustomInput";
 import CustomButton from "../Components/Common/Button/CustomButton";
-import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { createRecipesApi } from "../app/feautures/Recipes/recipesApi";
 
-function Recipe() {
-  // const [ingredients, setIngredients] = useState("");
-  const [ingredientsList, setIngredientsList] = useState([""]);
+export default function Recipe() {
+  const validationSchema = Yup.object({
+    title: Yup.string().required("Recipe name is required"),
+    description: Yup.string().required("Description is required"),
+    ingredients: Yup.array()
+      .required("ingredients are required")
+      .of(Yup.string().required("Ingredient is required"))
+      .min(1, "At least one ingredient is required"),
+    instructions: Yup.string().required("Instructions are required"),
+    preparationTime: Yup.number()
+      .required("Preparation time is required")
+      .positive()
+      .integer(),
+    cookingTime: Yup.number()
+      .required("Cooking time is required")
+      .positive()
+      .integer(),
+    cuisine: Yup.string().required("Cuisine is required"),
+    dietaryPreferences: Yup.string().required("Dietary preference is required"),
+  });
 
-  const handleInputChange = (index, value) => {
-    const updatevalue = [...ingredientsList];
-    updatevalue[index] = value;
-    setIngredientsList(updatevalue);
+  const formik = useFormik({
+    initialValues: {
+      title: "",
+      description: "",
+      ingredients: [""],
+      instructions: "",
+      preparationTime: "",
+      cookingTime: "",
+      cuisine: "",
+      dietaryPreferences: "",
+    },
+    validationSchema,
+    onSubmit: async (values) => {
+      try {
+        const response = await createRecipesApi(values);
+      } catch (error) {
+        console.error("Failed to Creat Recipe:", error);
+      }
+      // console.log("Form Data: ", values);
+    },
+  });
+
+  const addIngredient = () => {
+    formik.setFieldValue("ingredients", [...formik.values.ingredients, ""]);
   };
 
-  const AddIngredients = () => {
-    // if (ingredientsList.trim() !== "") {
-    setIngredientsList([...ingredientsList, ""]);
+  const removeIngredient = (index) => {
+    const updated = formik.values.ingredients.filter((_, i) => i !== index);
+    formik.setFieldValue("ingredients", updated);
   };
-  const RemoveInput = (index) => {
-    const updateList = ingredientsList.filter((_, i) => i !== index);
-    setIngredientsList(updateList);
-  };
+
   return (
     <div>
       <Navbar />
@@ -33,82 +67,172 @@ function Recipe() {
 
       <div className="flex justify-center items-center my-6">
         <div className=" w-full max-w-3xl p-8 rounded-3xl shadow-2xl bg-amber-200">
-          <CustomInput
-            label="Enter Recipe Name"
-            placeholder="Enter Recipe Title"
-          />
-          <CustomInput
-            label="Description "
-            variant="textarea"
-            type="text"
-            placeholder="Enter Recipe Description"
-          />
-
-          {ingredientsList.map((ingredients, index) => {
-            return (
-              <>
-                {" "}
-                <div key={index} className="mb-4">
-                  <CustomInput
-                    label="Ingredients "
-                    value={ingredients}
-                    variant="default"
-                    type="text"
-                    placeholder={` Ingredient ${index + 1}`}
-                    onChange={(e) => handleInputChange(index, e.target.value)}
-                  />
-                  <button onClick={() => RemoveInput(index)}>Remove</button>
+          <form onSubmit={formik.handleSubmit}>
+            {/* Recipe Name */}
+            <div className="mb-4">
+              <CustomInput
+                label="Enter Recipe Name"
+                name="title"
+                placeholder="Enter Recipe Title"
+                value={formik.values.title}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+              {formik.errors.title && formik.touched.title && (
+                <div className="text-red-600 text-sm">
+                  {formik.errors.title}
                 </div>
-              </>
-            );
-          })}
+              )}
+            </div>
 
-          <button
-            className="font-semibold text-blue-700 cursor-pointer mb-8"
-            onClick={AddIngredients}
-          >
-            Add Another Ingredients
-          </button>
-          <br />
+            {/* Description */}
+            <div className="mb-4">
+              <CustomInput
+                label="Description"
+                name="description"
+                variant="textarea"
+                placeholder="Enter Recipe Description"
+                value={formik.values.description}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+              {formik.errors.description && formik.touched.description && (
+                <div className="text-red-600 text-sm">
+                  {formik.errors.description}
+                </div>
+              )}
+            </div>
 
-          <CustomInput
-            label="Instructions"
-            variant="textarea"
-            type="text"
-            placeholder="Enter Cooking Details"
-          />
-          <CustomInput
-            label="Preparation Time (minutes)"
-            variant="default"
-            type="number"
-            placeholder="Enter Preparation Time "
-          />
-          <CustomInput
-            label="Cooking Time (minutes)"
-            variant="default"
-            type="number"
-            placeholder="Enter Cooking Time "
-          />
-          <CustomInput
-            label="Cuisine"
-            variant="default"
-            type="text"
-            placeholder="Enter Cuisine Type "
-          />
-          <CustomInput
-            label="Dietary Preferences"
-            variant="default"
-            type="text"
-            placeholder="Enter Dietary Preferences(Comma Seprate) "
-          />
-          {/* <label className="font-bold ml-4">Submit</label> */}
-          <div className="text-center">
-            <CustomButton value="Create Recipe" />
-          </div>
+            {/* Ingredients */}
+            {formik.values.ingredients.map((ingredient, index) => (
+              <div key={index} className="mb-4 ">
+                <CustomInput
+                  label={`Ingredient ${index + 1}`}
+                  name={`ingredients[${index}]`}
+                  placeholder={`Ingredient ${index + 1}`}
+                  value={ingredient}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                <button
+                  type="button"
+                  className="text-red-600 font-semibold hover:text-red-400"
+                  onClick={() => removeIngredient(index)}
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+            {formik.errors.ingredients &&
+              typeof formik.errors.ingredients === "string" && (
+                <div className="text-red-600 text-sm">
+                  {formik.errors.ingredients}
+                </div>
+              )}
+            <button
+              type="button"
+              className="font-semibold text-blue-700 cursor-pointer mb-6"
+              onClick={addIngredient}
+            >
+              Add Another Ingredient
+            </button>
+
+            {/* Instructions */}
+            <div className="mb-4">
+              <CustomInput
+                label="Instructions"
+                name="instructions"
+                variant="textarea"
+                placeholder="Enter Cooking Details"
+                value={formik.values.instructions}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+              {formik.errors.instructions && formik.touched.instructions && (
+                <div className="text-red-600 text-sm">
+                  {formik.errors.instructions}
+                </div>
+              )}
+            </div>
+
+            {/* Prep Time */}
+            <div className="mb-4">
+              <CustomInput
+                label="Preparation Time (minutes)"
+                name="preparationTime"
+                type="number"
+                placeholder="Enter Preparation Time"
+                value={formik.values.preparationTime}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+              {formik.errors.preparationTime &&
+                formik.touched.preparationTime && (
+                  <div className="text-red-600 text-sm">
+                    {formik.errors.preparationTime}
+                  </div>
+                )}
+            </div>
+
+            {/* Cook Time */}
+            <div className="mb-4">
+              <CustomInput
+                label="Cooking Time (minutes)"
+                name="cookingTime"
+                type="number"
+                placeholder="Enter Cooking Time"
+                value={formik.values.cookingTime}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+              {formik.errors.cookingTime && formik.touched.cookingTime && (
+                <div className="text-red-600 text-sm">
+                  {formik.errors.cookingTime}
+                </div>
+              )}
+            </div>
+
+            {/* Cuisine */}
+            <div className="mb-4">
+              <CustomInput
+                label="Cuisine"
+                name="cuisine"
+                placeholder="Enter Cuisine Type"
+                value={formik.values.cuisine}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+              {formik.errors.cuisine && formik.touched.cuisine && (
+                <div className="text-red-600 text-sm">
+                  {formik.errors.cuisine}
+                </div>
+              )}
+            </div>
+
+            {/* Dietary */}
+            <div className="mb-4">
+              <CustomInput
+                label="Dietary Preferences"
+                name="dietaryPreferences"
+                placeholder="Enter Dietary Preferences (Comma Separated)"
+                value={formik.values.dietaryPreferences}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+              {formik.errors.dietaryPreferences &&
+                formik.touched.dietaryPreferences && (
+                  <div className="text-red-600 text-sm">
+                    {formik.errors.dietaryPreferences}
+                  </div>
+                )}
+            </div>
+
+            <div className="text-center">
+              <CustomButton type="submit" value="Create Recipe" />
+            </div>
+          </form>
         </div>
       </div>
     </div>
   );
 }
-
-export default Recipe;

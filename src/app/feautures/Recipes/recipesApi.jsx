@@ -5,7 +5,6 @@ export const currentUserRecipesApi = (data) => {
     url: "v1/recipes/me",
     method: "GET",
     data,
-    noAuth: true,
   });
 };
 
@@ -14,7 +13,6 @@ export const createRecipesApi = (data) => {
     url: "v1/recipes/",
     method: "POST",
     data,
-    noAuth: true,
   });
 };
 
@@ -23,6 +21,13 @@ export const getNutrientsApi = (data) => {
     url: "v1/recipes/nutrients",
     method: "POST",
     data,
-    noAuth: true,
+  });
+};
+
+export const getAllRecipesApi = (data) => {
+  return makeApiCall({
+    url: "v1/recipes/",
+    method: "GET",
+    data,
   });
 };

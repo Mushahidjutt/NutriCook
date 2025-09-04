@@ -21,6 +21,8 @@ function Nutrients() {
     }
   };
 
+  console.log("Hello g", nutrients);
+
   return (
     <div>
       <Navbar />
