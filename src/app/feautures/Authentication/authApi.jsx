@@ -17,3 +17,12 @@ export const signupApi = (data) => {
     noAuth: true,
   });
 };
+
+export const updatePasswordApi = (data) => {
+  return makeApiCall({
+    url: "v1/users/updateMyPassword",
+    method: "PATCH",
+    data,
+    // noAuth: true,
+  });
+};
