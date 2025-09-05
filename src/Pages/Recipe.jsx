@@ -11,8 +11,11 @@ export default function Recipe() {
     title: Yup.string().required("Recipe name is required"),
     description: Yup.string().required("Description is required"),
     ingredients: Yup.array()
-      .required("ingredients are required")
-      .of(Yup.string().required("Ingredient is required"))
+      .of(
+        Yup.object({
+          ingName: Yup.string().required("Ingredient is required"),
+        })
+      )
       .min(1, "At least one ingredient is required"),
     instructions: Yup.string().required("Instructions are required"),
     preparationTime: Yup.number()
@@ -31,7 +34,7 @@ export default function Recipe() {
     initialValues: {
       title: "",
       description: "",
-      ingredients: [""],
+      ingredients: [], // start empty array of objects
       instructions: "",
       preparationTime: "",
       cookingTime: "",
@@ -42,15 +45,18 @@ export default function Recipe() {
     onSubmit: async (values) => {
       try {
         const response = await createRecipesApi(values);
+        console.log("Recipe Created:", response);
       } catch (error) {
-        console.error("Failed to Creat Recipe:", error);
+        console.error("Failed to Create Recipe:", error);
       }
-      // console.log("Form Data: ", values);
     },
   });
 
   const addIngredient = () => {
-    formik.setFieldValue("ingredients", [...formik.values.ingredients, ""]);
+    formik.setFieldValue("ingredients", [
+      ...formik.values.ingredients,
+      { ingName: "" },
+    ]);
   };
 
   const removeIngredient = (index) => {
@@ -108,9 +114,9 @@ export default function Recipe() {
               <div key={index} className="mb-4 ">
                 <CustomInput
                   label={`Ingredient ${index + 1}`}
-                  name={`ingredients[${index}]`}
+                  name={`ingredients[${index}].ingName`}
                   placeholder={`Ingredient ${index + 1}`}
-                  value={ingredient}
+                  value={ingredient.ingName}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
@@ -121,14 +127,18 @@ export default function Recipe() {
                 >
                   Remove
                 </button>
+                {formik.errors.ingredients &&
+                  formik.errors.ingredients[index] &&
+                  formik.errors.ingredients[index].ingName &&
+                  formik.touched.ingredients &&
+                  formik.touched.ingredients[index] && (
+                    <div className="text-red-600 text-sm">
+                      {formik.errors.ingredients[index].ingName}
+                    </div>
+                  )}
               </div>
             ))}
-            {formik.errors.ingredients &&
-              typeof formik.errors.ingredients === "string" && (
-                <div className="text-red-600 text-sm">
-                  {formik.errors.ingredients}
-                </div>
-              )}
+
             <button
               type="button"
               className="font-semibold text-blue-700 cursor-pointer mb-6"
