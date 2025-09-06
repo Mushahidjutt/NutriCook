@@ -1,6 +1,10 @@
 import Navbar from "../Components/Layout/Navbar";
 import React, { useEffect, useState } from "react";
-import { likedRecipeApi } from "../app/feautures/Recipes/likeToggleRecipe";
+import {
+  likedRecipeApi,
+  likeToggleRecipeApi,
+} from "../app/feautures/Recipes/likeToggleRecipe";
+import { toast } from "react-toastify";
 
 function Liked() {
   const [getLikedUserRecipes, setGetLikedUserRecipes] = useState({});
@@ -17,6 +21,17 @@ function Liked() {
       setGetLikedUserRecipes(response);
     } catch (error) {
       console.error("Error fetching Get Current User:", error);
+    }
+  };
+
+  const handleLikedToggleRecipes = async (id) => {
+    try {
+      await likeToggleRecipeApi(id);
+      toast.success("Recipe Unliked! 👎");
+
+      handleLikedAllRecipes();
+    } catch (error) {
+      console.error("Error in Like Toggle:", error);
     }
   };
 
@@ -41,7 +56,8 @@ function Liked() {
                   {recipe?.userName?.name}
                 </p>
                 <button
-                  className="rounded px-4 py-2 font-semibold text-white transition duration-200 
+                  onClick={() => handleLikedToggleRecipes(recipe?.id)}
+                  className="cursor-pointer rounded px-4 py-2 font-semibold text-white transition duration-200 
                  bg-gradient-to-r from-pink-500 via-red-500 to-purple-500 hover:from-purple-500 hover:via-red-500 hover:to-pink-500"
                 >
                   Like

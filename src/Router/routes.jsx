@@ -9,6 +9,7 @@ import Profile from "../Pages/Profile";
 import Signup from "../Components/Authentication/Signup";
 import Login from "../Components/Authentication/Login";
 import ProtectedRoutes from "../Components/Common/ProtectedRoutes";
+import RecipeDetails from "../Pages/RecipeDetails";
 
 export const routes = createBrowserRouter([
   {
@@ -64,6 +65,15 @@ export const routes = createBrowserRouter([
     element: (
       <ProtectedRoutes>
         <Recipe />
+      </ProtectedRoutes>
+    ),
+  },
+
+  {
+    path: "/recipe-details",
+    element: (
+      <ProtectedRoutes>
+        <RecipeDetails />
       </ProtectedRoutes>
     ),
   },

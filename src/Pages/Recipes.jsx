@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Layout/Navbar";
 import { currentUserRecipesApi } from "../app/feautures/Recipes/recipesApi";
+import { likeToggleRecipeApi } from "../app/feautures/Recipes/likeToggleRecipe";
 
 const Recipes = () => {
   const [getCurrentUserRecipes, setGetCurrentUserRecipes] = useState({});
+
+  const handleLikedToggleRecipes = async (id) => {
+    try {
+      await likeToggleRecipeApi(id);
+    } catch (error) {
+      console.error("Error in Like Toggle:", error);
+    }
+  };
 
   useEffect(() => {
     handleCurrentAllRecipes();
@@ -42,7 +51,8 @@ const Recipes = () => {
                   {recipe?.userName?.name}
                 </p>
                 <button
-                  className="rounded px-4 py-2 font-semibold text-white transition duration-200 
+                  onClick={() => handleLikedToggleRecipes(recipe?.id)}
+                  className="cursor-pointer rounded px-4 py-2 font-semibold text-white transition duration-200 
                  bg-gradient-to-r from-pink-500 via-red-500 to-purple-500 hover:from-purple-500 hover:via-red-500 hover:to-pink-500"
                 >
                   Like
