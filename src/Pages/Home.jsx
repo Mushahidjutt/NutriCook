@@ -26,7 +26,7 @@ function Home() {
       toast.success("Recipe Liked! 👍");
       handleGetAllRecipes();
     } catch (error) {
-      console.error("Error in Like Toggle:", error);
+      // console.error("Error in Like Toggle:", error);
     }
   };
 
