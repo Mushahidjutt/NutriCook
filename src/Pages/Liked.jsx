@@ -49,12 +49,7 @@ function Liked() {
             >
               <div className="mb-4 flex items-center justify-between">
                 <p className="text-sm font-medium text-gray-400">
-                  <span
-                    className=" mx-1 bg-gradient-to-r from-purple-400 to-blue-500 
-                  bg-clip-text font-semibold text-transparent"
-                  >
-                    By:
-                  </span>
+                  
                   {recipe?.userName?.name}
                 </p>
                 <button
