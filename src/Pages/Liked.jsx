@@ -77,12 +77,7 @@ function Liked() {
                 <p>
                   ❤ <span className="font-bold">{recipe?.likes}</span> Likes
                 </p>
-                <button
-                  className="p-2 bg-amber-300 rounded-2xl cursor-pointer "
-                  onClick={() => navigate(`/recipe-details/${recipe?.id}`)}
-                >
-                  Show Details
-                </button>
+               
               </div>
             </div>
           </div>
