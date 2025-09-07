@@ -5,6 +5,7 @@ import CustomButton from "../Common/Button/CustomButton";
 import CustomInput from "../Common/CustomInput";
 import { signupApi } from "../../app/feautures/Authentication/authApi";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const validationSchema = Yup.object({
   name: Yup.string()
@@ -29,9 +30,13 @@ function Signup() {
     onSubmit: async (values) => {
       try {
         const res = await signupApi(values);
+        toast.success("You have Succesful created a Account");
+
         console.log("SignUp  success:", res);
         navigate("/login");
       } catch (error) {
+        toast.error("Failed To Signup. -Try Again-");
+
         console.error("Signup Failed : ", error);
       }
     },
@@ -126,7 +131,7 @@ function Signup() {
             </form>
             <h1 className=" font-semibold text-center my-4">Alreay a user?</h1>
             <div className="text-center">
-              <CustomButton value="Login"  onClick={handleNavigateLogin} />
+              <CustomButton value="Login" onClick={handleNavigateLogin} />
             </div>
           </div>
         </div>

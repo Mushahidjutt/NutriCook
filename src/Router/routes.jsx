@@ -70,7 +70,7 @@ export const routes = createBrowserRouter([
   },
 
   {
-    path: "/recipe-details",
+    path: "/recipe-details/:id",
     element: (
       <ProtectedRoutes>
         <RecipeDetails />

@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import CustomButton from "../Common/Button/CustomButton";
 import { useNavigate } from "react-router-dom";
 import { loginApi } from "../../app/feautures/Authentication/authApi";
+import toast from "react-hot-toast";
 
 const validationSchema = Yup.object({
   email: Yup.string().required("Email is required"),
@@ -22,6 +23,7 @@ export default function Login() {
     onSubmit: async (values) => {
       try {
         const res = await loginApi(values);
+        toast.success("Login Succesful");
 
         if (res?.token) {
           localStorage.setItem("token", res.token);
@@ -32,6 +34,7 @@ export default function Login() {
 
         navigate("/");
       } catch (error) {
+        toast.error("Failed! To Login");
         console.error("Login failed Put Correct email/Password:", error);
       }
     },

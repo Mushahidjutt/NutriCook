@@ -4,10 +4,12 @@ import {
   likedRecipeApi,
   likeToggleRecipeApi,
 } from "../app/feautures/Recipes/likeToggleRecipe";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function Liked() {
   const [getLikedUserRecipes, setGetLikedUserRecipes] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     handleLikedAllRecipes();
@@ -75,7 +77,10 @@ function Liked() {
                 <p>
                   ❤ <span className="font-bold">{recipe?.likes}</span> Likes
                 </p>
-                <button className="p-2 bg-amber-300 rounded-2xl cursor-pointer ">
+                <button
+                  className="p-2 bg-amber-300 rounded-2xl cursor-pointer "
+                  onClick={() => navigate(`/recipe-details/${recipe?.id}`)}
+                >
                   Show Details
                 </button>
               </div>

@@ -11,11 +11,14 @@ import {
   IconLogout,
 } from "@tabler/icons-react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function Navbar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    toast.success("Logout Succesful");
+
     localStorage.clear();
     navigate("/login");
   };
@@ -23,12 +26,12 @@ function Navbar() {
     <div>
       <div className="flex justify-between px-6 py- bg-[#E2E8F0] ">
         <div>
-          <h1 className="flex ">
+          <h1 className="flex">
             <IconChefHat size={60} stroke={2} color="blue" />
-            <span className="ml-3 mt-4 text-3xl font-bold">
+            <Link to="/" className=" mt-3 text-3xl font-bold flex">
               Nutr<span className="text-yellow-500">i</span>
               <span className="text-blue-600">Cook</span>
-            </span>
+            </Link>
           </h1>
         </div>
 

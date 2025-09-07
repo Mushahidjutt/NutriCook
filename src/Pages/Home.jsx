@@ -3,9 +3,11 @@ import Navbar from "../Components/Layout/Navbar";
 import { getAllRecipesApi } from "../app/feautures/Recipes/recipesApi";
 import { likeToggleRecipeApi } from "../app/feautures/Recipes/likeToggleRecipe";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [getAllRecipes, setGetAllRecipes] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     handleGetAllRecipes();
@@ -26,7 +28,7 @@ function Home() {
       toast.success("Recipe Liked! 👍");
       handleGetAllRecipes();
     } catch (error) {
-      // console.error("Error in Like Toggle:", error);
+      console.error("Error in Like Toggle:", error);
     }
   };
 
@@ -59,7 +61,10 @@ function Home() {
                 <p>
                   ❤ <span className="font-bold">{recipe?.likes}</span> Likes
                 </p>
-                <button className="p-2 bg-amber-300 rounded-2xl cursor-pointer">
+                <button
+                  className="p-2 bg-amber-300 rounded-2xl cursor-pointer"
+                  onClick={() => navigate(`/recipe-details/${recipe?.id}`)}
+                >
                   Show Details
                 </button>
               </div>

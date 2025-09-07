@@ -31,3 +31,10 @@ export const getAllRecipesApi = (data) => {
     data,
   });
 };
+
+export const getRecipeByIdApi = (id) => {
+  return makeApiCall({
+    url: `v1/recipes/${id}`,
+    method: "GET",
+  });
+};

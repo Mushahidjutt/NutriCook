@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Layout/Navbar";
 import { currentUserRecipesApi } from "../app/feautures/Recipes/recipesApi";
 import { likeToggleRecipeApi } from "../app/feautures/Recipes/likeToggleRecipe";
+import { useNavigate } from "react-router-dom";
 
 const Recipes = () => {
   const [getCurrentUserRecipes, setGetCurrentUserRecipes] = useState({});
+  const navigate = useNavigate();
 
   const handleLikedToggleRecipes = async (id) => {
     try {
@@ -70,7 +72,10 @@ const Recipes = () => {
                 <p>
                   ❤ <span className="font-bold">{recipe?.likes}</span> Likes
                 </p>
-                <button className="p-2 bg-amber-300 rounded-2xl cursor-pointer ">
+                <button
+                  className="p-2 bg-amber-300 rounded-2xl cursor-pointer "
+                  onClick={() => navigate(`/recipe-details/${recipe?.id}`)}
+                >
                   Show Details
                 </button>
               </div>
