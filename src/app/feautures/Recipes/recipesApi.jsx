@@ -38,3 +38,18 @@ export const getRecipeByIdApi = (id) => {
     method: "GET",
   });
 };
+
+export const getRecipeUpdateByIdApi = (id, data) => {
+  return makeApiCall({
+    url: `v1/recipes/${id}`,
+    method: "PATCH",
+    data,
+  });
+};
+
+export const getRecipeDeleteByIdApi = (id) => {
+  return makeApiCall({
+    url: `v1/recipes/${id}`,
+    method: "DELETE",
+  });
+};

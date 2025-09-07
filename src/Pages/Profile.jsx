@@ -5,6 +5,7 @@ import { userNameUpdateApi } from "../app/feautures/Profile/userNameUpdateApi";
 import { userNameMeApi } from "../app/feautures/Profile/userNameApi";
 import { userEmailUpdateApi } from "../app/feautures/Profile/userEmailUpdate";
 import { updatePasswordApi } from "../app/feautures/Authentication/authApi";
+import Loader from "../Components/Common/Loader";
 
 function Profile() {
   const [updateUsername, setUpdateUsername] = useState("");
@@ -16,6 +17,7 @@ function Profile() {
   });
 
   const [userDetail, setUserDetail] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     handleGetMeAPi();
@@ -32,30 +34,41 @@ function Profile() {
 
   const handleUpdateUserName = async () => {
     try {
+      setLoading(true);
       const response = await userNameUpdateApi({ name: updateUsername });
       handleGetMeAPi();
     } catch (error) {
       console.error("Error in Updating Username:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleUpdateUserEmail = async () => {
     try {
+      setLoading(true);
+
       const response = await userEmailUpdateApi({ email: updateUserEmail });
       handleGetMeAPi();
     } catch (error) {
       console.error("Error in Updating UserEmail:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleUpdateUserPassword = async () => {
     try {
+      setLoading(true);
+
       const response = await updatePasswordApi(updateUserPassword);
       localStorage.setItem("token", response.token);
       console.log("This is REsponse ", response);
       handleGetMeAPi();
     } catch (error) {
       console.error("Error in Updating UsesPassword:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -63,6 +76,8 @@ function Profile() {
     const { name, value } = e.target;
     setUpdateUserPassword((prev) => ({ ...prev, [name]: value }));
   };
+
+  if (loading) return <Loader />;
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-100">
       <Navbar />

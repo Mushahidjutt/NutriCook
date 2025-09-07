@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getRecipeByIdApi } from "../app/feautures/Recipes/recipesApi";
+import Loader from "../Components/Common/Loader";
 
 const RecipeDetails = () => {
   const { id } = useParams();
@@ -15,7 +16,7 @@ const RecipeDetails = () => {
     fetchRecipe();
   }, [id]);
 
-  if (!recipe) return <p className="p-5 text-center text-lg">Loading...</p>;
+  if (!recipe) return <Loader />;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 via-teal-100 to-emerald-200 flex items-center justify-center p-6">

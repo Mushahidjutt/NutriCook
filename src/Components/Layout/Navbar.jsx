@@ -24,7 +24,7 @@ function Navbar() {
   };
   return (
     <div>
-      <div className="flex justify-between px-6 py- bg-[#E2E8F0] ">
+      <div className="flex justify-between px-6 py-2.5 bg-[#E2E8F0]  ">
         <div>
           <h1 className="flex">
             <IconChefHat size={60} stroke={2} color="blue" />

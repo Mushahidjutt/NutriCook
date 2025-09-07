@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../Components/Layout/Navbar";
 import CustomInput from "../Components/Common/CustomInput";
 import CustomButton from "../Components/Common/Button/CustomButton";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { createRecipesApi } from "../app/feautures/Recipes/recipesApi";
+import {
+  getRecipeByIdApi,
+  getRecipeUpdateByIdApi,
+} from "../app/feautures/Recipes/recipesApi";
+import { useParams, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-export default function Recipe() {
+export default function Edit() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   const validationSchema = Yup.object({
     title: Yup.string().required("Recipe name is required"),
     description: Yup.string().required("Description is required"),
@@ -43,18 +50,53 @@ export default function Recipe() {
     validationSchema,
     onSubmit: async (values) => {
       try {
-        const response = await createRecipesApi(values);
-        console.log("Recipe Created:", response);
+        await getRecipeUpdateByIdApi(id, {
+          ...values,
 
-        toast.success("Recipe Added");
-
-        formik.resetForm();
+          instructions: values.instructions
+            ? values.instructions.split("\n").map((i) => i.trim())
+            : [],
+          dietaryPreferences: values.dietaryPreferences
+            ? values.dietaryPreferences.split(",").map((i) => i.trim())
+            : [],
+        });
+        toast.success("Recipe Updated Successfully ");
+        navigate("/recipes");
       } catch (error) {
-        console.error("Failed to Create Recipe:", error);
-        toast.error("Recipe Not Added");
+        console.error("Failed to Update Recipe:", error);
+        toast.error("Recipe Update Failed ");
       }
     },
   });
+
+  useEffect(() => {
+    async function fetchRecipe() {
+      try {
+        const res = await getRecipeByIdApi(id);
+        const data = res?.data?.recipe;
+        console.log(data, "Fetched recipe data");
+
+        formik.setValues({
+          title: data.title || "",
+          description: data.description || "",
+          ingredients: data.ingredients || [],
+          instructions: Array.isArray(data.instructions)
+            ? data.instructions.join("\n")
+            : data.instructions || "",
+          preparationTime: data.preparationTime || "",
+          cookingTime: data.cookingTime || "",
+          cuisine: data.cuisine || "",
+          dietaryPreferences: Array.isArray(data.dietaryPreferences)
+            ? data.dietaryPreferences.join(", ") //
+            : data.dietaryPreferences || "",
+        });
+      } catch (error) {
+        console.error("Error fetching recipe:", error);
+        toast.error("Failed to load recipe data ");
+      }
+    }
+    fetchRecipe();
+  }, [id]);
 
   const addIngredient = () => {
     formik.setFieldValue("ingredients", [
@@ -73,7 +115,7 @@ export default function Recipe() {
       <Navbar />
 
       <h1 className="text-center text-3xl font-extrabold text-gray-800 mb-8 mt-6">
-        🍳 Create a New Recipe
+        ✏️ Edit Recipe
       </h1>
 
       <div className="flex justify-center items-center pb-10">
@@ -121,7 +163,7 @@ export default function Recipe() {
                   <CustomInput
                     label={`Ingredient ${index + 1}`}
                     name={`ingredients[${index}].ingName`}
-                    placeholder="Add Like this ( 1 Apple)"
+                    placeholder={`Ingredient ${index + 1}`}
                     value={ingredient.ingName}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -241,7 +283,7 @@ export default function Recipe() {
             </div>
 
             <div className="text-center pt-4">
-              <CustomButton type="submit" value=" Create Recipe" />
+              <CustomButton type="submit" value=" Update Recipe" />
             </div>
           </form>
         </div>

@@ -1,12 +1,36 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Layout/Navbar";
-import { currentUserRecipesApi } from "../app/feautures/Recipes/recipesApi";
+import {
+  currentUserRecipesApi,
+  getRecipeDeleteByIdApi,
+} from "../app/feautures/Recipes/recipesApi";
 import { likeToggleRecipeApi } from "../app/feautures/Recipes/likeToggleRecipe";
 import { useNavigate } from "react-router-dom";
+import Loader from "../Components/Common/Loader";
+import toast from "react-hot-toast";
 
 const Recipes = () => {
-  const [getCurrentUserRecipes, setGetCurrentUserRecipes] = useState({});
+  const [getCurrentUserRecipes, setGetCurrentUserRecipes] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  const handleDeleteRecipe = async (id) => {
+    try {
+      await getRecipeDeleteByIdApi(id);
+      toast.success("Recipe Deleted Successfully 🗑️");
+      setGetCurrentUserRecipes((prev) => ({
+        ...prev,
+        data: {
+          ...prev.data,
+          recipes: prev.data.recipes.filter((recipe) => recipe.id !== id),
+        },
+      }));
+      handleCurrentAllRecipes();
+    } catch (error) {
+      console.error("Failed to Delete Recipe:", error);
+      toast.error("Recipe Delete Failed ");
+    }
+  };
 
   const handleLikedToggleRecipes = async (id) => {
     try {
@@ -22,67 +46,76 @@ const Recipes = () => {
 
   const handleCurrentAllRecipes = async () => {
     try {
+      setLoading(true);
       const response = await currentUserRecipesApi();
-      console.log(response, "API response");
-
       setGetCurrentUserRecipes(response);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching Get Current User:", error);
+      setLoading(false);
     }
   };
 
   return (
-    <div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
       <Navbar />
-
-      <main className="grid grid-cols-3">
-        {getCurrentUserRecipes?.data?.recipes?.map((recipe, index) => (
-          <div key={index} className="">
+      {loading ? (
+        <Loader />
+      ) : (
+        <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+          {getCurrentUserRecipes?.data?.recipes?.map((recipe, index) => (
             <div
-              className="m-3  bg-gradient-to-br from-green-100 via-emerald-200 to-teal-200 
-            rounded-lg p-6 shadow-lg transition-transform hover:scale-105 hover:shadow-xl"
+              key={index}
+              className="bg-white rounded-2xl shadow-xl p-6 flex flex-col justify-between transition transform hover:scale-[1.02] hover:shadow-2xl"
             >
-              <div className="mb-4 flex items-center justify-between">
-                <p className="text-sm font-medium text-gray-400">
-                  <span
-                    className=" mx-1 bg-gradient-to-r from-purple-400 to-blue-500 
-                  bg-clip-text font-semibold text-transparent"
+              <div>
+                <div className="mb-4 flex items-center justify-between">
+                  <p className="text-sm text-gray-500">
+                    <span className="font-semibold text-indigo-600">By: </span>
+                    {recipe?.userName?.name}
+                  </p>
+                  <button
+                    onClick={() => handleLikedToggleRecipes(recipe?.id)}
+                    className="px-3 py-1.5 cursor-pointer rounded-lg font-medium text-white bg-gradient-to-r from-pink-500 to-red-500 hover:from-red-500 hover:to-pink-500 transition"
                   >
-                    By:
-                  </span>
-                  {recipe?.userName?.name}
-                </p>
-                <button
-                  onClick={() => handleLikedToggleRecipes(recipe?.id)}
-                  className="cursor-pointer rounded px-4 py-2 font-semibold text-white transition duration-200 
-                 bg-gradient-to-r from-pink-500 via-red-500 to-purple-500 hover:from-purple-500 hover:via-red-500 hover:to-pink-500"
-                >
-                  Like
-                </button>
-              </div>
-              <h3
-                className="mb-2 bg-gradient-to-r from-pink-500 to-yellow-500 
-              bg-clip-text text-2xl font-bold text-transparent"
-              >
-                {recipe?.title}
-              </h3>
-              <p>{recipe?.description}</p>
+                    ❤️ Like
+                  </button>
+                </div>
 
-              <div className="my-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <p>
-                  ❤ <span className="font-bold">{recipe?.likes}</span> Likes
+                <h3 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">
+                  {recipe?.title}
+                </h3>
+                <p className="text-gray-600 mb-4">{recipe?.description}</p>
+
+                <p className="text-gray-700 mb-6">
+                  ❤ <span className="font-semibold">{recipe?.likes}</span> Likes
                 </p>
+              </div>
+
+              <div className="flex gap-3 justify-between">
                 <button
-                  className="p-2 bg-amber-300 rounded-2xl cursor-pointer "
+                  className="flex-1  py-1.5 cursor-pointer rounded-lg bg-gradient-to-r from-amber-400 to-orange-500 text-white font-medium hover:from-orange-500 hover:to-amber-400 transition"
                   onClick={() => navigate(`/recipe-details/${recipe?.id}`)}
                 >
                   Show Details
                 </button>
+                <button
+                  className="flex-1  py-1.5 cursor-pointer rounded-lg bg-gradient-to-r from-green-400 to-emerald-500 text-white font-medium hover:from-emerald-500 hover:to-green-400 transition"
+                  onClick={() => navigate(`/edit/${recipe?.id}`)}
+                >
+                  Update
+                </button>
+                <button
+                  className="flex-1 py-1.5 cursor-pointer rounded-lg bg-gradient-to-r from-red-500 to-pink-600 text-white font-medium hover:from-pink-600 hover:to-red-500 transition"
+                  onClick={() => handleDeleteRecipe(recipe?.id)}
+                >
+                  Delete
+                </button>
               </div>
             </div>
-          </div>
-        ))}
-      </main>
+          ))}
+        </main>
+      )}
     </div>
   );
 };

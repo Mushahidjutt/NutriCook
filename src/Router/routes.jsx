@@ -10,6 +10,7 @@ import Signup from "../Components/Authentication/Signup";
 import Login from "../Components/Authentication/Login";
 import ProtectedRoutes from "../Components/Common/ProtectedRoutes";
 import RecipeDetails from "../Pages/RecipeDetails";
+import Edit from "../Pages/Edit";
 
 export const routes = createBrowserRouter([
   {
@@ -74,6 +75,15 @@ export const routes = createBrowserRouter([
     element: (
       <ProtectedRoutes>
         <RecipeDetails />
+      </ProtectedRoutes>
+    ),
+  },
+
+  {
+    path: "/edit/:id",
+    element: (
+      <ProtectedRoutes>
+        <Edit />
       </ProtectedRoutes>
     ),
   },
