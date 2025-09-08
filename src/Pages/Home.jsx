@@ -26,15 +26,15 @@ function Home() {
     }
   };
 
-  // const handleLikedToggleRecipes = async (id) => {
-  //   try {
-  //     await likeToggleRecipeApi(id);
-  //     toast.success("Recipe Liked! 👍");
-  //     handleGetAllRecipes();
-  //   } catch (error) {
-  //     console.error("Error in Like Toggle:", error);
-  //   }
-  // };
+  const handleLikedToggleRecipes = async (id) => {
+    try {
+      await likeToggleRecipeApi(id);
+      toast.success("Recipe Liked! 👍");
+      handleGetAllRecipes();
+    } catch (error) {
+      console.error("Error in Like Toggle:", error);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
