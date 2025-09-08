@@ -47,10 +47,9 @@ function Nutrients() {
             <CustomInput
               className="flex-1 rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:ring-1 focus:ring-blue-300 outline-none transition"
               type="text"
-              placeholder="Enter an ingredient e.g. Apple"
+              placeholder="Add Like  e.g. 1 Apple"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleAddIngredient()}
             />
             <button
               className=" text-white  cursor-pointer rounded-full  font-medium"

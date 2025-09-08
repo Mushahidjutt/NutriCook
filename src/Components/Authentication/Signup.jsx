@@ -1,22 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import CustomButton from "../Common/Button/CustomButton";
 import { signupApi } from "../../app/feautures/Authentication/authApi";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import CustomInput from "../Common/CustomInput";
 
 const validationSchema = Yup.object({
   name: Yup.string()
     .required("Full Name is required")
     .min(3, "Full Name must be at least 3 characters"),
-  email: Yup.string().required("Email address is required"),
-  password: Yup.string().required("Password is required"),
-  passwordConfirm: Yup.string().required("Confirm Password is required"),
+  email: Yup.string()
+    .trim()
+    .email("Please enter a valid email address (e.g. name@example.com)")
+    .required("Email is required"),
+
+  password: Yup.string()
+    .required("Password is required")
+    .min(8, "Password must be at least 8 characters long")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,}$/,
+      "Password must include at least 1 uppercase, 1 lowercase, 1 number, and 1 special character"
+    ),
+  passwordConfirm: Yup.string()
+    .required("Confirm Password is required")
+    .min(8, "Password must be at least 8 characters long")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,}$/,
+      "Password must include at least 1 uppercase, 1 lowercase, 1 number, and 1 special character"
+    ),
 });
 
 function Signup() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -28,6 +46,7 @@ function Signup() {
     validationSchema,
     onSubmit: async (values) => {
       try {
+        setLoading(true);
         const res = await signupApi(values);
         toast.success("Account created successfully 🎉");
         console.log("SignUp success:", res);
@@ -35,6 +54,8 @@ function Signup() {
       } catch (error) {
         toast.error("Failed to Signup. Try Again!");
         console.error("Signup Failed:", error);
+      } finally {
+        setLoading(false);
       }
     },
   });
@@ -45,7 +66,7 @@ function Signup() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-purple-100 to-indigo-100">
-      <main className="w-full max-w-md bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl p-8">
+      <main className="w-full max-w-md bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl p-8 my-6">
         <h1 className="text-4xl font-extrabold text-center mb-2 bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
           Create Account
         </h1>
@@ -53,12 +74,10 @@ function Signup() {
           Sign up to get started 🚀
         </p>
 
-        <form onSubmit={formik.handleSubmit} className="space-y-5">
+        <form onSubmit={formik.handleSubmit} className="space-y-5 my-6">
           <div>
-            <label className="block text-gray-700 font-medium mb-1 ml-2">
-              Full Name
-            </label>
-            <input
+            <CustomInput
+              label="Full Name"
               type="text"
               name="name"
               onChange={formik.handleChange}
@@ -68,15 +87,15 @@ function Signup() {
               placeholder="Enter your full name"
             />
             {formik.errors.name && formik.touched.name && (
-              <div className="text-sm text-red-500">{formik.errors.name}</div>
+              <div className="text-sm text-red-500 ml-2">
+                {formik.errors.name}
+              </div>
             )}
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium mb-1 ml-2">
-              Email
-            </label>
-            <input
+            <CustomInput
+              label="Email"
               type="email"
               name="email"
               onChange={formik.handleChange}
@@ -86,15 +105,15 @@ function Signup() {
               placeholder="Enter your email"
             />
             {formik.errors.email && formik.touched.email && (
-              <div className="text-sm text-red-500">{formik.errors.email}</div>
+              <div className="text-sm text-red-500 ml-2">
+                {formik.errors.email}
+              </div>
             )}
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium mb-1 ml-2">
-              Password
-            </label>
-            <input
+            <CustomInput
+              label="Password"
               type="password"
               name="password"
               onChange={formik.handleChange}
@@ -104,17 +123,15 @@ function Signup() {
               placeholder="Enter your password"
             />
             {formik.errors.password && formik.touched.password && (
-              <div className="text-sm text-red-500">
+              <div className="text-sm text-red-500 ml-2">
                 {formik.errors.password}
               </div>
             )}
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium mb-1 ml-2">
-              Confirm Password
-            </label>
-            <input
+            <CustomInput
+              label="Confirm Password"
               type="password"
               name="passwordConfirm"
               onChange={formik.handleChange}
@@ -125,14 +142,25 @@ function Signup() {
             />
             {formik.errors.passwordConfirm &&
               formik.touched.passwordConfirm && (
-                <div className="text-sm text-red-500">
+                <div className="text-sm text-red-500 ml-2">
                   {formik.errors.passwordConfirm}
                 </div>
               )}
           </div>
 
           <div className="text-center">
-            <CustomButton type="submit" value="Sign Up" />
+            <CustomButton
+              type="submit"
+              value={
+                loading ? (
+                  <div className="flex items-center justify-center gap-2">
+                    <div className="animate-spin rounded-full border-2 border-white border-t-transparent w-4 h-4"></div>
+                  </div>
+                ) : (
+                  "Sign Up"
+                )
+              }
+            />
           </div>
         </form>
 
