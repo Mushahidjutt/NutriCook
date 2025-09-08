@@ -26,15 +26,15 @@ function Home() {
     }
   };
 
-  const handleLikedToggleRecipes = async (id) => {
-    try {
-      await likeToggleRecipeApi(id);
-      toast.success("Recipe Liked! 👍");
-      handleGetAllRecipes();
-    } catch (error) {
-      console.error("Error in Like Toggle:", error);
-    }
-  };
+  // const handleLikedToggleRecipes = async (id) => {
+  //   try {
+  //     await likeToggleRecipeApi(id);
+  //     toast.success("Recipe Liked! 👍");
+  //     handleGetAllRecipes();
+  //   } catch (error) {
+  //     console.error("Error in Like Toggle:", error);
+  //   }
+  // };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
@@ -44,10 +44,7 @@ function Home() {
       ) : (
         <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
           {getAllRecipes?.data?.recipes?.map((recipe, index) => (
-            <div
-              key={index}
-              className="flex flex-col h-full"
-            >
+            <div key={index} className="flex flex-col h-full">
               <div className="flex flex-col justify-between h-full bg-white/90 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-gray-100 transition-transform hover:scale-[1.02] hover:shadow-2xl">
                 <div>
                   <div className="mb-4 flex items-center justify-between">
