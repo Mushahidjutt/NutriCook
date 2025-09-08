@@ -48,7 +48,7 @@ function Liked() {
 
       {loading ? (
         <Loader />
-      ) : (
+      ) : getLikedUserRecipes?.data?.recipes?.length > 0 ? (
         <main className="grid grid-cols-3">
           {getLikedUserRecipes?.data?.recipes?.map((recipe, index) => (
             <div key={index} className="">
@@ -97,6 +97,12 @@ function Liked() {
             </div>
           ))}
         </main>
+      ) : (
+        <div className="p-10 text-center">
+          <h1 className="text-xl font-semibold text-gray-600">
+            There is no data
+          </h1>
+        </div>
       )}
     </div>
   );

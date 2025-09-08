@@ -10,7 +10,7 @@ import Loader from "../Components/Common/Loader";
 import toast from "react-hot-toast";
 
 const Recipes = () => {
-  const [getCurrentUserRecipes, setGetCurrentUserRecipes] = useState([]);
+  const [getCurrentUserRecipes, setGetCurrentUserRecipes] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -21,11 +21,10 @@ const Recipes = () => {
       setGetCurrentUserRecipes((prev) => ({
         ...prev,
         data: {
-          ...prev.data,
-          recipes: prev.data.recipes.filter((recipe) => recipe.id !== id),
+          ...prev?.data,
+          recipes: prev?.data?.recipes?.filter((recipe) => recipe.id !== id),
         },
       }));
-      handleCurrentAllRecipes();
     } catch (error) {
       console.error("Failed to Delete Recipe:", error);
       toast.error("Recipe Delete Failed ");
@@ -61,9 +60,9 @@ const Recipes = () => {
       <Navbar />
       {loading ? (
         <Loader />
-      ) : (
+      ) : getCurrentUserRecipes?.data?.recipes?.length > 0 ? (
         <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-          {getCurrentUserRecipes?.data?.recipes?.map((recipe, index) => (
+          {getCurrentUserRecipes.data.recipes.map((recipe, index) => (
             <div
               key={index}
               className="bg-white rounded-2xl shadow-xl p-6 flex flex-col justify-between transition transform hover:scale-[1.02] hover:shadow-2xl"
@@ -115,6 +114,12 @@ const Recipes = () => {
             </div>
           ))}
         </main>
+      ) : (
+        <div className="p-10 text-center">
+          <h1 className="text-xl font-semibold text-gray-600">
+            There is no data
+          </h1>
+        </div>
       )}
     </div>
   );
