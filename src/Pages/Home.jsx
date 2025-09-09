@@ -15,16 +15,16 @@ function Home() {
     handleGetAllRecipes();
   }, []);
 
-  // const handleGetAllRecipes = async () => {
-  //   try {
-  //     setLoading(true);
-  //     const response = await getAllRecipesApi();
-  //     setGetAllRecipes(response);
-  //     setLoading(false);
-  //   } catch (error) {
-  //     console.error("Error fetching GetAllRecipes:", error);
-  //   }
-  // };
+  const handleGetAllRecipes = async () => {
+    try {
+      setLoading(true);
+      const response = await getAllRecipesApi();
+      setGetAllRecipes(response);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching GetAllRecipes:", error);
+    }
+  };
 
   const handleLikedToggleRecipes = async (id) => {
     try {
