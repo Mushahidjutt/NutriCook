@@ -34,64 +34,88 @@ function Navbar() {
             </Link>
           </h1>
         </div>
+        {localStorage.token ? (
+          <div>
+            <div className="text-xl mt-3 font-semibold   flex items-center justify-center gap-5 ">
+              <Link
+                to="/"
+                className="hover:text-indigo-600 transition flex gap-0.5 "
+              >
+                <IconHome className="mt-1" size={22} stroke={2} />
+                Home
+              </Link>
 
-        <div className="text-xl font-semibold   flex items-center justify-center gap-5 ">
-          <Link
-            to="/"
-            className="hover:text-indigo-600 transition flex gap-0.5 "
-          >
-            <IconHome className="mt-1" size={22} stroke={2} />
-            Home
-          </Link>
+              <Link
+                to="/recipe"
+                className="hover:text-indigo-600 transition flex gap-0.5 "
+              >
+                <IconCircleDashedPlus className="mt-1" size={22} stroke={2} />
+                Recipe
+              </Link>
 
-          <Link
-            to="/recipe"
-            className="hover:text-indigo-600 transition flex gap-0.5 "
-          >
-            <IconCircleDashedPlus className="mt-1" size={22} stroke={2} />
-            Recipe
-          </Link>
+              <Link
+                to="/recipes"
+                className="hover:text-indigo-600 transition flex gap-0.5"
+              >
+                <IconReceipt className="mt-1" size={22} stroke={2} />
+                Recipes
+              </Link>
 
-          <Link
-            to="/recipes"
-            className="hover:text-indigo-600 transition flex gap-0.5"
-          >
-            <IconReceipt className="mt-1" size={22} stroke={2} />
-            Recipes
-          </Link>
+              <Link
+                to="/nutrients"
+                className="hover:text-indigo-600 transition flex gap-0.5"
+              >
+                <IconApple className="mt-1" size={22} stroke={2} />
+                Nutrients
+              </Link>
 
-          <Link
-            to="/nutrients"
-            className="hover:text-indigo-600 transition flex gap-0.5"
-          >
-            <IconApple className="mt-1" size={22} stroke={2} />
-            Nutrients
-          </Link>
+              <Link
+                to="/liked"
+                className="hover:text-indigo-600 transition flex gap-0.5"
+              >
+                <IconHearts className="mt-1" size={22} stroke={2} />
+                Liked
+              </Link>
 
-          <Link
-            to="/liked"
-            className="hover:text-indigo-600 transition flex gap-0.5"
-          >
-            <IconHearts className="mt-1" size={22} stroke={2} />
-            Liked
-          </Link>
+              <Link
+                to="/profile"
+                className="hover:text-indigo-600 transition flex gap-0.5"
+              >
+                <IconUserCircle className="mt-1" size={22} stroke={2} />
+                Profile
+              </Link>
 
-          <Link
-            to="/profile"
-            className="hover:text-indigo-600 transition flex gap-0.5"
-          >
-            <IconUserCircle className="mt-1" size={22} stroke={2} />
-            Profile
-          </Link>
-
-          <button
-            className="hover:text-indigo-600 transition flex gap-0.5 cursor-pointer"
-            onClick={handleLogout}
-          >
-            Logout
-            <IconLogout className="mt-1" size={22} stroke={2} />
-          </button>
-        </div>
+              <button
+                className="hover:text-indigo-600 transition flex gap-0.5 cursor-pointer"
+                onClick={handleLogout}
+              >
+                Logout
+                <IconLogout className="mt-1" size={22} stroke={2} />
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div>
+            {" "}
+            <div className="text-xl font-semibold mt-3  flex items-center justify-center gap-5">
+              {" "}
+              <Link
+                to="/"
+                className="hover:text-indigo-600 transition flex gap-0.5 "
+              >
+                <IconHome className="mt-1" size={22} stroke={2} />
+                Home
+              </Link>{" "}
+              <Link
+                to="/nutrients"
+                className="hover:text-indigo-600 transition flex gap-0.5"
+              >
+                <IconApple className="mt-1" size={22} stroke={2} />
+                Nutrients
+              </Link>
+            </div>{" "}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -15,11 +15,7 @@ import Edit from "../Pages/Edit";
 export const routes = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <ProtectedRoutes>
-        <Home />
-      </ProtectedRoutes>
-    ),
+    element: <Home />,
   },
   {
     path: "/recipes",
@@ -55,11 +51,7 @@ export const routes = createBrowserRouter([
   },
   {
     path: "/nutrients",
-    element: (
-      <ProtectedRoutes>
-        <Nutrients />
-      </ProtectedRoutes>
-    ),
+    element: <Nutrients />,
   },
   {
     path: "/recipe",
