@@ -155,9 +155,7 @@ export default function Edit() {
             </div>
 
             <div className="bg-sky-50 p-4 rounded-xl border border-sky-200">
-              <h3 className="text-lg font-semibold mb-3 text-sky-700">
-                🛒 Ingredients
-              </h3>
+             
               {formik.values.ingredients.map((ingredient, index) => (
                 <div key={index} className="mb-3">
                   <CustomInput
