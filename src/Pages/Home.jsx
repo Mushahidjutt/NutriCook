@@ -9,20 +9,37 @@ import Loader from "../Components/Common/Loader";
 function Home() {
   const [getAllRecipes, setGetAllRecipes] = useState({});
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     handleGetAllRecipes();
-  }, []);
+    if (error) {
+      const timer = setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [error, navigate]);
 
   const handleGetAllRecipes = async () => {
     try {
       setLoading(true);
       const response = await getAllRecipesApi();
       setGetAllRecipes(response);
+      setError(null);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching GetAllRecipes:", error);
+      if (error.response?.status === 401) {
+        toast.error("You have no access");
+        setError("You have no access");
+      } else {
+        toast.error("Something went wrong");
+        setError("Something went wrong");
+      }
+      setLoading(false);
     }
   };
 
@@ -35,6 +52,16 @@ function Home() {
       console.error("Error in Like Toggle:", error);
     }
   };
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p style={{ color: "red", fontSize: "18px", fontWeight: "bold" }}>
+          {error}
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">

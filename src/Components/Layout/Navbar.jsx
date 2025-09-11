@@ -113,6 +113,13 @@ function Navbar() {
                 <IconApple className="mt-1" size={22} stroke={2} />
                 Nutrients
               </Link>
+              <Link
+                to="/login"
+                className="hover:text-indigo-600 transition flex gap-0.5"
+              >
+                Login
+                <IconLogout className="mt-1" size={22} stroke={2} />
+              </Link>
             </div>{" "}
           </div>
         )}
