@@ -163,7 +163,15 @@ function Profile() {
             </h2>
 
             <form>
-              
+              <label className="ml-2">Current Password</label>
+              <input
+                onChange={handleChange}
+                name="passwordCurrent"
+                value={updateUserPassword.passwordCurrent}
+                className="my-2 mb-4 w-full rounded-xl border border-gray-300 bg-white px-4 py-3 
+             text-gray-700 placeholder-gray-400 shadow-sm focus:border-violet-400 focus:ring-2 focus:ring-violet-300 focus:outline-none transition duration-200"
+                type="password"
+              />
 
               <label className="ml-2">New Password</label>
               <input
