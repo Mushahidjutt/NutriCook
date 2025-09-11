@@ -35,7 +35,7 @@ function Nutrients() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-     
+      <Navbar />
 
       <div className="flex justify-center items-start mt-10 mb-10 px-4">
         <div className="w-full max-w-3xl p-8 rounded-2xl shadow-md bg-white">
