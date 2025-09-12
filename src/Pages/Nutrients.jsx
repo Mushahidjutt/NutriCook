@@ -87,6 +87,8 @@ function Nutrients() {
             </div>
           )}
 
+          {console.log(nutrients?.data?.updatedIngredients)}
+
           {nutrients && !loading && (
             <div className="space-y-6">
               {nutrients?.data?.updatedIngredients?.map((item, index) => (
