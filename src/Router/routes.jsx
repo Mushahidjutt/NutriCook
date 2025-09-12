@@ -11,6 +11,7 @@ import Login from "../Components/Authentication/Login";
 import ProtectedRoutes from "../Components/Common/ProtectedRoutes";
 import RecipeDetails from "../Pages/RecipeDetails";
 import Edit from "../Pages/Edit";
+import Test from "../Pages/Test";
 
 export const routes = createBrowserRouter([
   {
@@ -76,6 +77,15 @@ export const routes = createBrowserRouter([
     element: (
       <ProtectedRoutes>
         <Edit />
+      </ProtectedRoutes>
+    ),
+  },
+
+  {
+    path: "/test",
+    element: (
+      <ProtectedRoutes>
+        <Test />
       </ProtectedRoutes>
     ),
   },
