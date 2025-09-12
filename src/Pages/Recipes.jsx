@@ -73,12 +73,7 @@ const Recipes = () => {
                     <span className="font-semibold text-indigo-600">By: </span>
                     {recipe?.userName?.name}
                   </p>
-                  <button
-                    onClick={() => handleLikedToggleRecipes(recipe?.id)}
-                    className="px-3 py-1.5 cursor-pointer rounded-lg font-medium text-white bg-gradient-to-r from-pink-500 to-red-500 hover:from-red-500 hover:to-pink-500 transition"
-                  >
-                    ❤️ Like
-                  </button>
+                 
                 </div>
 
                 <h3 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">
