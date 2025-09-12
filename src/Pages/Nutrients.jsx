@@ -96,17 +96,7 @@ function Nutrients() {
                   <h2 className="text-xl font-semibold text-gray-700 mb-3">
                     {item.ingredientName || ingredients[index]}
                   </h2>
-                  <div className="grid grid-cols-2 gap-2 text-gray-700">
-                    <p>Calories: {item.nutrients.calories}</p>
-                    <p>Protein: {item.nutrients.protein}</p>
-                    <p>Fat: {item.nutrients.fat}</p>
-                    <p>Carbs: {item.nutrients.carbohydrates}</p>
-                    <p>Sodium: {item.nutrients.vitamins.sodium}</p>
-                    <p>Potassium: {item.nutrients.vitamins.potassium}</p>
-                    <p>Cholesterol: {item.nutrients.vitamins.cholesterol}</p>
-                    <p>Fiber: {item.nutrients.vitamins.fiber}</p>
-                    <p>Sugar: {item.nutrients.vitamins.sugar}</p>
-                  </div>
+                  
                 </div>
               ))}
             </div>
