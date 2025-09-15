@@ -8,8 +8,8 @@ import {
   IconHearts,
   IconUserCircle,
   IconLogout,
-  IconMenu2, // hamburger
-  IconX, // close button
+  IconMenu2,
+  IconX,
 } from "@tabler/icons-react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -25,7 +25,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-[#E2E8F0] px-6 py-2.5" >
+    <nav className="bg-[#E2E8F0] px-6 py-2.5">
       <div className="flex justify-between items-center px-2">
         {/* Logo */}
         <h1 className="flex items-center">
@@ -38,7 +38,7 @@ function Navbar() {
 
         {/* Desktop Menu */}
         {localStorage.token ? (
-          <ul className="hidden md:flex md:gap-4 md:text-sm  lg:flex gap-6 lg:text-lg lg:font-semibold sm:px-3">
+          <ul className="hidden   lg:flex gap-4 lg:text-lg lg:font-semibold sm:px-3">
             <Link to="/" className="hover:text-indigo-600 flex gap-1">
               <IconHome className="mt-0.5" size={22} stroke={2} /> Home
             </Link>
@@ -62,7 +62,7 @@ function Navbar() {
               className="hover:text-red-600 flex gap-1 cursor-pointer"
               onClick={handleLogout}
             >
-              Logout <IconLogout className="mt-0.5" size={22} stroke={2} />
+              <IconLogout className="mt-0.5" size={22} stroke={2} />
             </button>
           </ul>
         ) : (
@@ -80,7 +80,7 @@ function Navbar() {
         )}
 
         {/* Mobile Hamburger Button */}
-        <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
+        <button className="lg:hidden" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? (
             <IconX size={30} stroke={2} />
           ) : (
@@ -92,7 +92,7 @@ function Navbar() {
       {/* Mobile Menu */}
       {isOpen && (
         <>
-          <div className="md:hidden mt-4 flex flex-col gap-4 item-end text-base  p-4 rounded-lg shadow cursor-pointer">
+          <div className="xl:hidden  md: mt-4 flex flex-col gap-4 item-end text-base  p-4 rounded-lg shadow cursor-pointer">
             {localStorage.token ? (
               <>
                 <Link

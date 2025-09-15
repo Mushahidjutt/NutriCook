@@ -11,7 +11,6 @@ import Login from "../Components/Authentication/Login";
 import ProtectedRoutes from "../Components/Common/ProtectedRoutes";
 import RecipeDetails from "../Pages/RecipeDetails";
 import Edit from "../Pages/Edit";
-import Test from "../Pages/Test";
 
 export const routes = createBrowserRouter([
   {
@@ -81,14 +80,6 @@ export const routes = createBrowserRouter([
     ),
   },
 
-  {
-    path: "/test",
-    element: (
-      <ProtectedRoutes>
-        <Test />
-      </ProtectedRoutes>
-    ),
-  },
   { path: "/signup", element: <Signup /> },
   { path: "/login", element: <Login /> },
   { path: "*", element: <div>Page not found</div> },

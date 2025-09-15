@@ -72,7 +72,6 @@ function Nutrients() {
             Nutrient Calculator
           </h1>
 
-          {/* Input + Add Button */}
           <div className="flex gap-2 mb-4">
             <CustomInput
               className="flex-1 rounded-lg border border-gray-300 px-4 py-2"
@@ -89,7 +88,6 @@ function Nutrients() {
             </button>
           </div>
 
-          {/* Selected Ingredients */}
           {ingredients.length > 0 && (
             <div className="mb-4 flex flex-wrap gap-2">
               {ingredients.map((item, index) => (
@@ -103,7 +101,6 @@ function Nutrients() {
             </div>
           )}
 
-          {/* Calculate Button */}
           <div className="text-center mb-6">
             <button
               className="bg-amber-500 text-white px-6 py-2 cursor-pointer rounded-lg"
@@ -113,14 +110,12 @@ function Nutrients() {
             </button>
           </div>
 
-          {/* Loader */}
           {loading && (
             <div className="flex justify-center my-6">
               <Loader />
             </div>
           )}
 
-          {/* Individual Ingredients Nutrients */}
           {nutrients && !loading && (
             <div className="space-y-6">
               {nutrients?.data?.updatedIngredients?.map((item, index) => (
@@ -144,7 +139,6 @@ function Nutrients() {
             </div>
           )}
 
-          {/* ✅ Total Nutrients for All Ingredients */}
           {totalNutrients && (
             <div className="bg-green-100 p-4 mt-6 rounded-lg shadow">
               <h2 className="text-xl font-bold mb-3 text-green-800">
