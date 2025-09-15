@@ -75,7 +75,12 @@ const RecipeDetails = () => {
           <p className="text-lg">
             ❤ <span className="font-bold">{recipe.likes}</span> Likes
           </p>
-          
+          <button
+            onClick={() => navigate(-1)}
+            className="px-5 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl shadow-md transition"
+          >
+            ⬅ Back
+          </button>
         </div>
       </div>
     </div>
