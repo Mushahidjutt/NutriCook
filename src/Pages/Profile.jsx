@@ -85,7 +85,7 @@ function Profile() {
         ⚡ Profile Settings
       </h1>
       <main>
-        <div className="flex justify-center items-center mt-10 mb-8">
+        <div className="flex justify-center items-center mt-10 mb-8 mx-8">
           <div className="w-full max-w-4xl p-10 rounded-3xl bg-white/80 backdrop-blur-xl shadow-xl border border-gray-200 space-y-12">
             <h2 className="text-2xl font-semibold text-center text-indigo-600 mb-6">
               👤 Update Username

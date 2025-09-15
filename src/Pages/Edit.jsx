@@ -118,7 +118,7 @@ export default function Edit() {
         ✏️ Edit Recipe
       </h1>
 
-      <div className="flex justify-center items-center pb-10">
+      <div className="flex justify-center items-center pb-10 mx-8">
         <div className="w-full max-w-3xl bg-white p-8 rounded-2xl shadow-2xl border border-sky-300">
           <form onSubmit={formik.handleSubmit} className="space-y-6">
             <div>

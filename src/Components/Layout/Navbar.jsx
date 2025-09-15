@@ -26,7 +26,7 @@ function Navbar() {
 
   return (
     <nav className="bg-[#E2E8F0] px-6 py-2.5">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center px-2">
         {/* Logo */}
         <h1 className="flex items-center">
           <IconChefHat size={50} stroke={2} color="blue" />
@@ -38,7 +38,7 @@ function Navbar() {
 
         {/* Desktop Menu */}
         {localStorage.token ? (
-          <ul className="hidden md:flex gap-6 text-lg font-semibold">
+          <ul className="hidden md:flex md:gap-4 md:text-sm  lg:flex gap-6 lg:text-lg lg:font-semibold sm:px-3">
             <Link to="/" className="hover:text-indigo-600 flex gap-1">
               <IconHome size={22} stroke={2} /> Home
             </Link>

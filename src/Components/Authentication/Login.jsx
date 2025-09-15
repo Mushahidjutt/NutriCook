@@ -68,7 +68,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100">
-      <main className="w-full max-w-md bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl p-8 my-8">
+      <main className="w-full max-w-md bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl p-8 my-8 mx-6">
         <h1 className="text-4xl font-extrabold text-center mb-2  text-primary text-blue-500">
           Welcome Back
         </h1>

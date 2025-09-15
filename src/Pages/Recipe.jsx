@@ -69,14 +69,14 @@ export default function Recipe() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 ">
       <Navbar />
 
-      <h1 className="text-center text-3xl font-extrabold text-gray-800 mb-8 mt-6">
+      <h1 className="text-center text-3xl font-extrabold text-gray-800 mb-8 mt-6 ">
         🍳 Create a New Recipe
       </h1>
 
-      <div className="flex justify-center items-center pb-10">
+      <div className="flex justify-center items-center pb-10 sm:mb-8 sm:mt-6 sm:mx-8 sm:mr-10 mx-8">
         <div className="w-full max-w-3xl bg-white p-8 rounded-2xl shadow-2xl border border-sky-300">
           <form onSubmit={formik.handleSubmit} className="space-y-6">
             <div>
