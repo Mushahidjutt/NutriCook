@@ -8,14 +8,7 @@ const RecipeDetails = () => {
   const [recipe, setRecipe] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function fetchRecipe() {
-      const response = await getRecipeByIdApi(id);
-      setRecipe(response?.data?.recipe || null);
-    }
-    fetchRecipe();
-  }, [id]);
-
+  
   if (!recipe) return <Loader />;
 
   return (
