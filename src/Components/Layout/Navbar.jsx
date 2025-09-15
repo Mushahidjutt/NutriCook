@@ -25,7 +25,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-[#E2E8F0] px-6 py-2.5">
+    <nav className="bg-[#E2E8F0] px-6 py-2.5" >
       <div className="flex justify-between items-center px-2">
         {/* Logo */}
         <h1 className="flex items-center">
@@ -40,28 +40,29 @@ function Navbar() {
         {localStorage.token ? (
           <ul className="hidden md:flex md:gap-4 md:text-sm  lg:flex gap-6 lg:text-lg lg:font-semibold sm:px-3">
             <Link to="/" className="hover:text-indigo-600 flex gap-1">
-              <IconHome size={22} stroke={2} /> Home
+              <IconHome className="mt-0.5" size={22} stroke={2} /> Home
             </Link>
             <Link to="/recipe" className="hover:text-indigo-600 flex gap-1">
-              <IconCircleDashedPlus size={22} stroke={2} /> Recipe
+              <IconCircleDashedPlus className="mt-0.5" size={22} stroke={2} />{" "}
+              Recipe
             </Link>
             <Link to="/recipes" className="hover:text-indigo-600 flex gap-1">
-              <IconReceipt size={22} stroke={2} /> Recipes
+              <IconReceipt className="mt-0.5" size={22} stroke={2} /> Recipes
             </Link>
             <Link to="/nutrients" className="hover:text-indigo-600 flex gap-1">
-              <IconApple size={22} stroke={2} /> Nutrients
+              <IconApple className="mt-0.5" size={22} stroke={2} /> Nutrients
             </Link>
             <Link to="/liked" className="hover:text-indigo-600 flex gap-1">
-              <IconHearts size={22} stroke={2} /> Liked
+              <IconHearts className="mt-0.5" size={22} stroke={2} /> Liked
             </Link>
             <Link to="/profile" className="hover:text-indigo-600 flex gap-1">
-              <IconUserCircle size={22} stroke={2} /> Profile
+              <IconUserCircle className="mt-0.5" size={22} stroke={2} /> Profile
             </Link>
             <button
-              className="hover:text-indigo-600 flex gap-1"
+              className="hover:text-red-600 flex gap-1 cursor-pointer"
               onClick={handleLogout}
             >
-              Logout <IconLogout size={22} stroke={2} />
+              Logout <IconLogout className="mt-0.5" size={22} stroke={2} />
             </button>
           </ul>
         ) : (

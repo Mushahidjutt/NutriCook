@@ -10,6 +10,7 @@ function Home() {
   const [getAllRecipes, setGetAllRecipes] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [foodImages, setFoodImages] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,6 +30,17 @@ function Home() {
       const response = await getAllRecipesApi();
       setGetAllRecipes(response);
       setError(null);
+
+      if (response?.data?.recipes?.length > 0) {
+        let temp = [];
+        for (let i = 0; i < response.data.recipes.length; i++) {
+          const res = await fetch("https://foodish-api.com/api/");
+          const data = await res.json();
+          temp.push(data.image);
+        }
+        setFoodImages(temp);
+      }
+
       setLoading(false);
     } catch (error) {
       console.error("Error fetching GetAllRecipes:", error);
@@ -69,41 +81,69 @@ function Home() {
       {loading ? (
         <Loader />
       ) : (
-        <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+        <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 p-10">
           {getAllRecipes?.data?.recipes?.map((recipe, index) => (
-            <div key={index} className="flex flex-col h-full">
-              <div className="flex flex-col justify-between h-full bg-white/90 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-gray-100 transition-transform hover:scale-[1.02] hover:shadow-2xl">
-                <div>
-                  <div className="mb-4 flex items-center justify-between">
-                    <p className="text-sm font-medium text-gray-500">
-                      <span className="mx-1 bg-gradient-to-r from-purple-500 to-blue-600 bg-clip-text font-semibold text-transparent">
-                        By:
-                      </span>
-                      {recipe?.userName?.name}
-                    </p>
-                    <button
-                      onClick={() => handleLikedToggleRecipes(recipe?.id)}
-                      className="cursor-pointer rounded-lg px-4 py-1.5 font-medium text-white transition duration-200 bg-gradient-to-r from-pink-500 to-red-500 hover:from-red-500 hover:to-pink-500"
-                    >
-                      ❤️ Like
-                    </button>
-                  </div>
-                  <h3 className="mb-2 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-2xl font-bold text-transparent">
-                    {recipe?.title}
-                  </h3>
-                  <p className="text-gray-600 line-clamp-4">
-                    {recipe?.description}
+            <div key={index} className="relative group flex flex-col h-full">
+              <div
+                className="relative flex flex-col justify-between h-full rounded-3xl p-6 
+        bg-white/20 backdrop-blur-xl border border-white/30 shadow-xl 
+        transition-all duration-500 hover:scale-[1.05] hover:shadow-2xl hover:border-white/50"
+              >
+                <div className="relative mb-5 overflow-hidden rounded-2xl">
+                  <img
+                    src={
+                      foodImages[index] ||
+                      "https://foodish-api.com/images/pizza/pizza3.jpg"
+                    }
+                    alt={recipe?.title}
+                    className="w-full h-52 object-cover rounded-2xl transform transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-2xl"></div>
+                  <p className="absolute bottom-3 left-3 text-xs font-semibold px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white shadow-md">
+                    {recipe?.category || "Recipe"}
                   </p>
                 </div>
-                <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <p className="text-gray-700">
-                    ❤ <span className="font-bold">{recipe?.likes}</span> Likes
+
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-sm font-medium text-gray-800 dark:text-gray-200">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-purple-600 font-bold">
+                      By:
+                    </span>{" "}
+                    <span className="font-semibold">
+                      {recipe?.userName?.name}
+                    </span>
                   </p>
                   <button
-                    className="px-4 py-1.5 bg-gradient-to-r from-amber-400 to-orange-500 text-white rounded-lg cursor-pointer font-medium hover:from-orange-500 hover:to-amber-400 transition"
+                    onClick={() => handleLikedToggleRecipes(recipe?.id)}
+                    className="px-4 py-1.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-rose-500 to-red-600 shadow-md hover:shadow-lg transition-all hover:from-red-600 hover:to-rose-500"
+                  >
+                    ❤️ Like
+                  </button>
+                </div>
+
+                <h3 className="mb-3 text-2xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500">
+                  {recipe?.title}
+                </h3>
+
+                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed line-clamp-4">
+                  {recipe?.description}
+                </p>
+
+                <div className="mt-6 flex items-center justify-between">
+                  <p className="text-gray-800 dark:text-gray-200 text-sm">
+                    ❤{" "}
+                    <span className="font-bold text-lg text-rose-600">
+                      {recipe?.likes}
+                    </span>{" "}
+                    Likes
+                  </p>
+                  <button
+                    className="px-5 py-2 rounded-xl font-semibold text-sm text-white shadow-md 
+              bg-gradient-to-r from-amber-400 to-orange-500 hover:from-orange-500 hover:to-amber-400 
+              transition-all duration-300 hover:shadow-lg"
                     onClick={() => navigate(`/recipe-details/${recipe?.id}`)}
                   >
-                    Show Details
+                    Show Details ✨
                   </button>
                 </div>
               </div>
