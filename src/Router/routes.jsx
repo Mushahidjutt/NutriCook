@@ -11,6 +11,7 @@ import Login from "../Components/Authentication/Login";
 import ProtectedRoutes from "../Components/Common/ProtectedRoutes";
 import RecipeDetails from "../Pages/RecipeDetails";
 import Edit from "../Pages/Edit";
+import Weather from "../Pages/Weather";
 
 export const routes = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ export const routes = createBrowserRouter([
         <Edit />
       </ProtectedRoutes>
     ),
+  },
+  {
+    path: "/weather",
+    element: <Weather />,
   },
 
   { path: "/signup", element: <Signup /> },
