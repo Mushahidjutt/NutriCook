@@ -32,7 +32,12 @@ function Weather() {
           <div>
             <h2>Weather information is : {city} </h2>
 
-          
+            <input
+              className="rounded-2xl outline-none p-2 bg-gray-300"
+              type="text"
+              placeholder="Search City "
+              value={city}
+            />
           </div>
 
           <button
