@@ -5,7 +5,19 @@ function Weather() {
   const [weather, setWeather] = useState(null);
   const [city, setCity] = useState("");
 
-  
+  const handleGetweather = async () => {
+    try {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API}`
+      );
+      const data = await response.json();
+      setWeather(data);
+      console.log(weather);
+
+      console.log(response);
+    } catch (error) {
+      console.error("Error fetching Weather:", error);
+    }
 
     useEffect(() => {
       handleGetweather();
