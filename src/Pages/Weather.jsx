@@ -59,11 +59,7 @@ function Weather() {
               <span className="text-sm text-gray-500">Temperature</span>
             </div>
 
-            <div className="flex flex-col items-center bg-green-50 p-4 rounded-xl shadow-sm">
-              <IconDroplet size={30} className="text-green-500 mb-2" />
-              <p className="text-lg font-medium">{weather.main.humidity}%</p>
-              <span className="text-sm text-gray-500">Humidity</span>
-            </div>
+            
 
             <div className="flex flex-col items-center bg-yellow-50 p-4 rounded-xl shadow-sm">
               <IconWind size={30} className="text-yellow-500 mb-2" />
