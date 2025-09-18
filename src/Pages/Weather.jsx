@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { IconSearch, IconTemperature, IconDroplet, IconWind, IconClock } from "@tabler/icons-react";
+import {
+  IconSearch,
+  IconTemperature,
+  IconDroplet,
+  IconWind,
+  IconClock,
+} from "@tabler/icons-react";
 
 const API = "adcfc4f3bef00cf239d4dd18364a090d";
 
@@ -84,11 +90,12 @@ function Weather() {
           </div>
         </div>
       ) : (
-        <p className="text-gray-600 mt-6">Search a city to see weather info 🌍</p>
+        <p className="text-gray-600 mt-6">
+          Search a city to see weather info 🌍
+        </p>
       )}
 
       {/* Button */}
-      
     </div>
   );
 }
