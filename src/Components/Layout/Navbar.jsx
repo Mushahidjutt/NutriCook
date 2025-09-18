@@ -10,6 +10,7 @@ import {
   IconLogout,
   IconMenu2,
   IconX,
+  IconSearch,
 } from "@tabler/icons-react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
