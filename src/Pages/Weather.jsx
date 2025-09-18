@@ -80,9 +80,9 @@ function Weather() {
           </div>
         </div>
       ) : (
-        <p className="text-gray-600 mt-6">
-          Search a city to see weather info 🌍
-        </p>
+        // <p className="text-gray-600 mt-6">
+        //   Search a city to see weather info 🌍
+        // </p>
       )}
 
       {/* Button */}
