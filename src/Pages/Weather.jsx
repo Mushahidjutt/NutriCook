@@ -40,13 +40,7 @@ function Weather() {
         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
           <IconSearch stroke={2} size={20} />
         </span>
-        <input
-          type="text"
-          placeholder="Search City..."
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          className="pl-10 pr-3 py-3 border rounded-xl w-full shadow focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
+        
       </div>
 
       {/* Weather Info Card */}
