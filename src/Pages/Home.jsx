@@ -55,15 +55,7 @@ function Home() {
     }
   };
 
-  const handleLikedToggleRecipes = async (id) => {
-    try {
-      await likeToggleRecipeApi(id);
-      toast.success("Recipe Liked! 👍");
-      handleGetAllRecipes();
-    } catch (error) {
-      console.error("Error in Like Toggle:", error);
-    }
-  };
+ 
 
   if (error) {
     return (
