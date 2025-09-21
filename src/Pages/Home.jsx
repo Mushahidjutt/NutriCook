@@ -121,7 +121,9 @@ function Home() {
                   </button>
                 </div>
 
-               
+                <h3 className="mb-3 text-2xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500">
+                  {recipe?.title}
+                </h3>
 
                 <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed line-clamp-4">
                   {recipe?.description}
