@@ -83,17 +83,7 @@ function Liked() {
                   </h3>
                   <p className="line-clamp-4">{recipe?.description}</p>
 
-                  <div className="my-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                    <p>
-                      ❤ <span className="font-bold">{recipe?.likes}</span> Likes
-                    </p>
-                    <button
-                      className="p-2 bg-amber-300 rounded-2xl cursor-pointer "
-                      onClick={() => navigate(`/recipe-details/${recipe?.id}`)}
-                    >
-                      Show Details
-                    </button>
-                  </div>
+                 
                 </div>
               </div>
             </div>
