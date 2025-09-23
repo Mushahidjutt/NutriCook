@@ -282,9 +282,7 @@ export default function Edit() {
                 )}
             </div>
 
-            <div className="text-center pt-4">
-              <CustomButton type="submit" value=" Update Recipe" />
-            </div>
+            
           </form>
         </div>
       </div>
