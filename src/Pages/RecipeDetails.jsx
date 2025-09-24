@@ -52,9 +52,7 @@ const RecipeDetails = () => {
         </div>
 
         <div className="bg-gray-50 rounded-lg p-4 mb-6 shadow-inner">
-          <h3 className="font-bold text-xl mb-3 text-gray-800">
-            🛒 Ingredients
-          </h3>
+         
           <ul className="list-disc pl-5 space-y-1">
             {(recipe.ingredients || []).map((item, index) => (
               <li key={index} className="text-gray-700">
