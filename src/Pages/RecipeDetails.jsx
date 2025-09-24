@@ -31,7 +31,9 @@ const RecipeDetails = () => {
         </p>
 
         <div className="grid grid-cols-2 gap-4 text-gray-600 mb-6">
-         
+          <p>
+            <span className="font-semibold"> By:</span> {recipe?.userName?.name}
+          </p>
           <p>
             <span className="font-semibold"> Prep Time:</span>{" "}
             {recipe.preparationTime} min
