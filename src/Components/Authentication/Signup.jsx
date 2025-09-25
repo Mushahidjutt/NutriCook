@@ -129,25 +129,7 @@ function Signup() {
             )}
           </div>
 
-          <div>
-            <CustomInput
-              label="Confirm Password"
-              type="password"
-              name="passwordConfirm"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.passwordConfirm}
-              className="w-full border border-gray-300 rounded-xl px-4 py-2 bg-white text-gray-700 focus:outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-300 shadow-sm"
-              placeholder="Re-enter your password"
-            />
-            {formik.errors.passwordConfirm &&
-              formik.touched.passwordConfirm && (
-                <div className="text-sm text-red-500 ml-2">
-                  {formik.errors.passwordConfirm}
-                </div>
-              )}
-          </div>
-
+         
           <div className="text-center">
             <CustomButton
               type="submit"
