@@ -79,23 +79,7 @@ export default function Login() {
 
         <form onSubmit={formik.handleSubmit} className="space-y-5">
           <>
-            <div>
-              <CustomInput
-                label="Email"
-                type="text"
-                name="email"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
-                className="w-full border border-gray-300 rounded-xl bg-white  text-gray-700 focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-300 shadow-sm"
-                placeholder="Enter your email"
-              />
-              {formik.errors.email && formik.touched.email && (
-                <div className="text-sm text-red-500 ml-2">
-                  {formik.errors.email}
-                </div>
-              )}
-            </div>
+           
 
             <div className="relative">
               {/* <label className="block text-gray-700 font-medium mb-1">
