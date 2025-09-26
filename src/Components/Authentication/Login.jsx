@@ -37,7 +37,29 @@ export default function Login() {
       password: "",
     },
     validationSchema,
-   
+    onSubmit: async (values) => {
+      try {
+        setLoading(true);
+        setLoadingButton(true);
+        const res = await loginApi(values);
+        toast.success("Login Successful");
+
+        if (res?.token) {
+          localStorage.setItem("token", res.token);
+        }
+        if (res?.data?.user?.role) {
+          localStorage.setItem("role", res.data.user.role);
+        }
+
+        navigate("/");
+      } catch (error) {
+        toast.error("Failed! To Login");
+        console.error("Login failed Put Correct email/Password:", error);
+      } finally {
+        setLoadingButton(false);
+        setLoading(false);
+      }
+    },
   });
 
   const handleNavigateSignup = () => {
