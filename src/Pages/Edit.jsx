@@ -274,7 +274,12 @@ export default function Edit() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              
+              {formik.errors.dietaryPreferences &&
+                formik.touched.dietaryPreferences && (
+                  <div className="text-red-600 text-sm">
+                    {formik.errors.dietaryPreferences}
+                  </div>
+                )}
             </div>
 
             <div className="text-center pt-4">
