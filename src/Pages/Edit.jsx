@@ -250,7 +250,14 @@ export default function Edit() {
             </div>
 
             <div>
-             
+              <CustomInput
+                label="Cuisine"
+                name="cuisine"
+                placeholder="Enter Cuisine Type"
+                value={formik.values.cuisine}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
               {formik.errors.cuisine && formik.touched.cuisine && (
                 <div className="text-red-600 text-sm">
                   {formik.errors.cuisine}
