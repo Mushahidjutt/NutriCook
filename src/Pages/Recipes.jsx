@@ -92,12 +92,7 @@ const Recipes = () => {
               </div>
 
               <div className="flex gap-3 justify-between">
-                <button
-                  className="flex-1  py-1.5 cursor-pointer rounded-lg bg-gradient-to-r from-amber-400 to-orange-500 text-white font-medium hover:from-orange-500 hover:to-amber-400 transition"
-                  onClick={() => navigate(`/recipe-details/${recipe?.id}`)}
-                >
-                  Show Details
-                </button>
+                
                 <button
                   className="flex-1  py-1.5 cursor-pointer rounded-lg bg-gradient-to-r from-green-400 to-emerald-500 text-white font-medium hover:from-emerald-500 hover:to-green-400 transition"
                   onClick={() => navigate(`/edit/${recipe?.id}`)}
