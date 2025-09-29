@@ -104,12 +104,7 @@ const Recipes = () => {
                 >
                   Update
                 </button>
-                <button
-                  className="flex-1 py-1.5 cursor-pointer rounded-lg bg-gradient-to-r from-red-500 to-pink-600 text-white font-medium hover:from-pink-600 hover:to-red-500 transition"
-                  onClick={() => handleDeleteRecipe(recipe?.id)}
-                >
-                  Delete
-                </button>
+               
               </div>
             </div>
           ))}
