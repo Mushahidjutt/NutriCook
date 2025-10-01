@@ -33,16 +33,7 @@ const CustomInput = ({
 
   return (
     <>
-      {label && <label className="block mb-1 ml-2">{label}</label>}
-      <input
-        name={name}
-        type={type}
-        value={value}
-        onChange={onChange}
-        onBlur={onBlur}
-        placeholder={placeholder}
-        className={`${baseClass} ${className}`}
-      />
+      
     </>
   );
 };
