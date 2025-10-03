@@ -47,7 +47,18 @@ function Navbar() {
               <IconCircleDashedPlus className="mt-0.5" size={22} stroke={2} />{" "}
               Recipe
             </Link>
-           
+            <Link to="/recipes" className="hover:text-indigo-600 flex gap-1">
+              <IconReceipt className="mt-0.5" size={22} stroke={2} /> Recipes
+            </Link>
+            <Link to="/nutrients" className="hover:text-indigo-600 flex gap-1">
+              <IconApple className="mt-0.5" size={22} stroke={2} /> Nutrients
+            </Link>
+            <Link to="/liked" className="hover:text-indigo-600 flex gap-1">
+              <IconHearts className="mt-0.5" size={22} stroke={2} /> Liked
+            </Link>
+            <Link to="/profile" className="hover:text-indigo-600 flex gap-1">
+              <IconUserCircle className="mt-0.5" size={22} stroke={2} /> Profile
+            </Link>
             <button
               className="hover:text-red-600 flex gap-1 cursor-pointer"
               onClick={handleLogout}
