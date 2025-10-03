@@ -68,7 +68,15 @@ function Navbar() {
           </ul>
         ) : (
           <ul className="hidden md:flex gap-6 text-lg font-semibold">
-            
+            <Link to="/" className="hover:text-indigo-600 flex gap-1">
+              <IconHome size={22} stroke={2} /> Home
+            </Link>
+            <Link to="/nutrients" className="hover:text-indigo-600 flex gap-1">
+              <IconApple size={22} stroke={2} /> Nutrients
+            </Link>
+            <Link to="/login" className="hover:text-indigo-600 flex gap-1">
+              Login <IconLogout size={22} stroke={2} />
+            </Link>
           </ul>
         )}
 
