@@ -85,7 +85,7 @@ export const routes = createBrowserRouter([
     element: <Weather />,
   },
 
-  { path: "/signup", element: <Signup /> },
-  { path: "/login", element: <Login /> },
-  { path: "*", element: <div>Page not found</div> },
+  // { path: "/signup", element: <Signup /> },
+  // { path: "/login", element: <Login /> },
+  // { path: "*", element: <div>Page not found</div> },
 ]);
