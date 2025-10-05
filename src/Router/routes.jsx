@@ -18,7 +18,14 @@ export const routes = createBrowserRouter([
     path: "/",
     element: <Home />,
   },
-  
+  {
+    path: "/recipes",
+    element: (
+      <ProtectedRoutes>
+        <Recipes />
+      </ProtectedRoutes>
+    ),
+  },
   {
     path: "/profile",
     element: (
