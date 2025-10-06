@@ -105,7 +105,10 @@ export default function Edit() {
     ]);
   };
 
-  
+  const removeIngredient = (index) => {
+    const updated = formik.values.ingredients.filter((_, i) => i !== index);
+    formik.setFieldValue("ingredients", updated);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200">
