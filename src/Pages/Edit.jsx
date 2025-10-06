@@ -137,7 +137,23 @@ export default function Edit() {
               )}
             </div>
 
-           
+            <div>
+              <CustomInput
+                label="Description"
+                name="description"
+                variant="textarea"
+                placeholder="Enter Recipe Description"
+                value={formik.values.description}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+              {formik.errors.description && formik.touched.description && (
+                <div className="text-red-600 text-sm">
+                  {formik.errors.description}
+                </div>
+              )}
+            </div>
+
             <div className="bg-sky-50 p-4 rounded-xl border border-sky-200">
               <h3 className="text-lg font-semibold mb-3 text-sky-700">
                 🛒 Ingredients
