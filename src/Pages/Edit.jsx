@@ -121,21 +121,7 @@ export default function Edit() {
       <div className="flex justify-center items-center pb-10 mx-8">
         <div className="w-full max-w-3xl bg-white p-8 rounded-2xl shadow-2xl border border-sky-300">
           <form onSubmit={formik.handleSubmit} className="space-y-6">
-            <div>
-              <CustomInput
-                label="Recipe Name"
-                name="title"
-                placeholder="Enter Recipe Title"
-                value={formik.values.title}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              {formik.errors.title && formik.touched.title && (
-                <div className="text-red-600 text-sm">
-                  {formik.errors.title}
-                </div>
-              )}
-            </div>
+           
 
             <div>
               <CustomInput
