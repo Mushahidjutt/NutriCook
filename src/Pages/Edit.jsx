@@ -37,7 +37,16 @@ export default function Edit() {
   });
 
   const formik = useFormik({
-   
+    initialValues: {
+      title: "",
+      description: "",
+      ingredients: [],
+      instructions: "",
+      preparationTime: "",
+      cookingTime: "",
+      cuisine: "",
+      dietaryPreferences: "",
+    },
     validationSchema,
     onSubmit: async (values) => {
       try {
