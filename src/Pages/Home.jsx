@@ -89,20 +89,7 @@ function Home() {
         bg-white/20 backdrop-blur-xl border border-white/30 shadow-xl 
         transition-all duration-500 hover:scale-[1.05] hover:shadow-2xl hover:border-white/50"
               >
-                <div className="relative mb-5 overflow-hidden rounded-2xl">
-                  <img
-                    src={
-                      foodImages[index] ||
-                      "https://foodish-api.com/images/pizza/pizza3.jpg"
-                    }
-                    alt={recipe?.title}
-                    className="w-full h-52 object-cover rounded-2xl transform transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-2xl"></div>
-                  <p className="absolute bottom-3 left-3 text-xs font-semibold px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white shadow-md">
-                    {recipe?.category || "Recipe"}
-                  </p>
-                </div>
+              
 
                 <div className="flex items-center justify-between mb-4">
                   <p className="text-sm font-medium text-gray-800 dark:text-gray-200">
