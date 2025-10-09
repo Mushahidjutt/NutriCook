@@ -149,18 +149,7 @@ function Signup() {
           </div>
 
           <div className="text-center">
-            <CustomButton
-              type="submit"
-              value={
-                loading ? (
-                  <div className="flex items-center justify-center gap-2">
-                    <div className="animate-spin rounded-full border-2 border-white border-t-transparent w-4 h-4"></div>
-                  </div>
-                ) : (
-                  "Sign Up"
-                )
-              }
-            />
+          
           </div>
         </form>
 
