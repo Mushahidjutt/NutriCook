@@ -187,13 +187,7 @@ export default function Edit() {
                 </div>
               ))}
 
-              <button
-                type="button"
-                className="text-sky-700 font-semibold mt-2 hover:underline"
-                onClick={addIngredient}
-              >
-                ➕ Add Ingredient
-              </button>
+            
             </div>
 
             <div>

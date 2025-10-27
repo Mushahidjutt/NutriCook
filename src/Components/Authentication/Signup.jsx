@@ -148,9 +148,7 @@ function Signup() {
               )}
           </div>
 
-          <div className="text-center">
-          
-          </div>
+          <div className="text-center"></div>
         </form>
 
         <p className="text-center text-gray-600 mt-6">
