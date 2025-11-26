@@ -101,7 +101,9 @@ function Liked() {
         </main>
       ) : (
         <div className="p-10 text-center">
-         
+          <h1 className="text-xl font-semibold text-gray-600">
+            There is no data
+          </h1>
         </div>
       )}
     </div>
